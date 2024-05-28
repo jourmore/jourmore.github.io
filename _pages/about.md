@@ -7,9 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-🆕 Jourmore is a Personal Website for organizing scientific research.
+* Jourmore is a Personal Website for organizing scientific research.
 
-✏️ AI & MD & Pharmacy & Biology & Medicine & Chemistry
+AI & MD & Pharmacy & Biology & Medicine & Chemistry
 ======
 
 
