@@ -40,7 +40,7 @@ How to edit your site's GitHub repository
 Many people use a git client
 
 👉Now: Nanobody
-![Editing a markdown file for a talk](/images/nanobody.png)
+![Editing a markdown file for a talk](/images/nanobody.png#pic_center =50%)
 
 For more info
 ------
