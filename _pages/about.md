@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "<Jourmore> Academic Personal Websites"
+title: ":red[Jourmore]: Academic Personal Websites"
 author_profile: true
 redirect_from: 
   - /about/
@@ -14,7 +14,7 @@ A data-driven personal website
 
 
 Getting started
-======
+------
 1. Register
 1. Fork
 1. Go to the repository's settings

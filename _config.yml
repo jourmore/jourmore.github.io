@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Jourmore"
+title                    : "Jourmore Homepage"
 title_separator          : "-"
 name                     : &name "Jourmore"
 description              : &description "personal description"
@@ -24,7 +24,7 @@ author:
   avatar           : "profile.png"
   name             : "Jourmore"
   pronouns         : # example: "she/her"  
-  bio              : "A PhD candidate in Bioinformatics & Theoretical Calculation. AI & MD in Pharmacy & Biology & Medicine & Chemistry."
+  bio              : "A PhD Student in Bioinformatics & Theoretical Calculation. AI & MD & Pharmacy & Biology & Medicine & Chemistry."
   location         : "Chengdu, China"
   employer         : "Sichaun University"
   uri              : # URL
