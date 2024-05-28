@@ -23,7 +23,7 @@ The main configuration file
 1. [NBsTem: A webserver for Nanobody Thermostability Prediction.](http://www.nbscal.online/)
 
 <!-- ![Nanobody](/images/nanobody.png#pic_center=50%) -->
-<img src="/images/nanobody.png" alt="Nanobody" style="width: auto; height: 40px;">
+<img src="/images/nanobody.png" alt="Nanobody" style="width: auto; height: 60px;">
 
 2. NBsPocket
 
