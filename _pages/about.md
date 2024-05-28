@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: ":red[Jourmore]: Academic Personal Websites"
+title: "Jourmore: Personal Websites"
 author_profile: true
 redirect_from: 
   - /about/
