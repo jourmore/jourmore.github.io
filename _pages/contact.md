@@ -2,9 +2,6 @@
 permalink: /contact/
 title: "About Joumore"
 author_profile: true
-redirect_from: 
-  - "/contact/"
-  - "/contact.html"
 ---
 
 ## Locations of key files/directories
