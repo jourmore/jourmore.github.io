@@ -7,9 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages.
+A PhD Student in Bioinformatics & Theoretical Calculation.
 
-A data-driven personal website
+AI & MD & Pharmacy & Biology & Medicine & Chemistry
 ======
 
 
@@ -39,8 +39,8 @@ How to edit your site's GitHub repository
 ------
 Many people use a git client
 
-Example: editing a markdown file for a talk
-![Editing a markdown file for a talk](/images/editing-talk.png)
+👉Now: Nanobody
+![Editing a markdown file for a talk](/images/nanobody.png)
 
 For more info
 ------
