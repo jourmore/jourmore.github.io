@@ -1,47 +1,43 @@
 ---
 permalink: /
-title: "Jourmore: Personal Websites"
+title: "About"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-A PhD Student in Bioinformatics & Theoretical Calculation.
+* Jourmore is a Personal Website for organizing scientific research.
 
 AI & MD & Pharmacy & Biology & Medicine & Chemistry
 ======
 
 
-Getting started
-------
-1. Register
-1. Fork
-1. Go to the repository's settings
-1. Set site-wide configuration and create content & metadata
-1. Upload any files 
-1. Check status
-
-Site-wide configuration
+👉Major Research
 ------
 The main configuration file
 
-Create content & metadata
+
+👉Now Project: Nanobody
 ------
-For site content
+1. [NBsTem: A webserver for Nanobody Thermostability Prediction.](http://www.nbscal.online/)
 
-**Markdown generator**
+![Nanobody](/images/nanobody.png#pic_center =50%)
 
-I have also created [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-)
+2. NBsPocket
 
-How to edit your site's GitHub repository
+3. NBsDis
+
+
+👉Previous Work
 ------
-Many people use a git client
+1. 000
 
-👉Now: Nanobody
-![Editing a markdown file for a talk](/images/nanobody.png#pic_center =50%)
+2. 000
 
-For more info
+3. 000
+
+
+More
 ------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+...
