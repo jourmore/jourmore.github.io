@@ -7,9 +7,9 @@ redirect_from:
   - /about.html
 ---
 
-* Jourmore is a Personal Website for organizing scientific research.
+🆕 Jourmore is a Personal Website for organizing scientific research.
 
-AI & MD & Pharmacy & Biology & Medicine & Chemistry
+✏️ AI & MD & Pharmacy & Biology & Medicine & Chemistry
 ======
 
 
@@ -23,7 +23,7 @@ The main configuration file
 1. [NBsTem: A webserver for Nanobody Thermostability Prediction.](http://www.nbscal.online/)
 
 <!-- ![Nanobody](/images/nanobody.png#pic_center=50%) -->
-<img src="/images/nanobody.png" alt="Nanobody" style="width: auto; height: 60px;">
+<img src="/images/nanobody.png" alt="Nanobody" style="width: auto; height: 100px;">
 
 2. NBsPocket
 
