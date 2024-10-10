@@ -4,10 +4,10 @@
 
 [Link to Jourmore Personal Homepage](https://jourmore.github.io/)
 
-####　About
+##　About
 
-####　Reasearch
+##　Reasearch
 
-####　Publications
+##　Publications
 
-####　Software
+##　Software
