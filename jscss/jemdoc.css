@@ -8,7 +8,7 @@ table#tlayout {
 
 body {
 	background: #e7e7e7 url(./body-bg.png) 0 0 repeat; /*background: white;*/
-	font-family: "Times New Roman", serif;
+	/*font-family: "Times New Roman", serif;*/
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 	color: #6d6d6d;
 	padding-bottom: 8px;
@@ -134,14 +134,14 @@ h1, h2, h3 {
 
 h1 {
 	font-size: 165%;
-	color:#bb2649;
+	color:#00619a;
 	font-weight: bold;
 }
 
 h2 {
 	padding-top: 0.8em;
 	font-size: 125%;
-	color: #303030;
+	color: #bb2649;
 	font-weight: bold;
 }
 
@@ -218,7 +218,7 @@ p + ul, p + ol {
 }
 
 li {
-	color: #0085ff;
+	color: #833500;
 }
 
 li ul, li ol {
