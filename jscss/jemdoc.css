@@ -8,12 +8,12 @@ table#tlayout {
 
 body {
 	background: #e7e7e7 url(./body-bg.png) 0 0 repeat; /*background: white;*/
-	/*font-family: "Times New Roman", serif;*/
+	font-family: "Times New Roman", serif;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-	color: #6d6d6d;
+/*	color: #6d6d6d;
 	padding-bottom: 8px;
 	font-size: 1em;
-	line-height: 1.5;
+	line-height: 1.5;*/
 	margin: 0;
 }
 
