@@ -1,16 +1,7 @@
-# jourmore.github.io
+# Jourmore Lab
 
 ![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
 
-<!-- [Link to Jourmore Personal Homepage](https://jourmore.github.io/) -->
+<!-- [Link to Jourmore Lab Homepage](https://jourmore.github.io/) -->
 
-* About
-
-* Reasearch
-
-* Publications
-
-* Tools and Webserver
-
-* Related links
-
+* Jourmore Lab Research Group Website
