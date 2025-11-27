@@ -6,6 +6,7 @@
 
 ## Jourmore Lab Research Group Website
 
+![Jourmore Lab](https://github.com/jourmore/jourmore.github.io/blob/main/images/banner.png)
 
 ### * Bioinformatics and Cheminformatics
 * Machine learning (ML) & Deep learning (DL)
