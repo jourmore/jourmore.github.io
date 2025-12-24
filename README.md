@@ -16,4 +16,5 @@
 ### * Research
 1) Computer-aided small molecule drug screening and design (CADD & AIDD)
 2) Computer-aided binder (protein & antibody & nanobody) design
+3) Model evaluation, Model development, Pipeline development, Database development, Webserver application
    
