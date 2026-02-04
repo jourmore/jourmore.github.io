@@ -129,8 +129,9 @@ h1, h2, h3 {
 	padding-bottom: 0.2em;
 	line-height: 1.0;
 	padding-top: 0.5em;
-	/*border-bottom: none;*/
 }
+
+
 
 h1 {
 	font-size: 165%;
@@ -144,6 +145,7 @@ h2 {
 	font-size: 125%;
 	color: #bb2649;
 	font-weight: normal;
+	border-bottom: none;
 }
 
 h2 + h3 {
@@ -155,6 +157,7 @@ h3 {
 	border-bottom: none;
 	color: #019b98;
 	font-weight: lighter;
+	border-bottom: none;
 }
 
 p {
