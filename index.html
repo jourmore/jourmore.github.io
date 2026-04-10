@@ -3,11 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>Jourmore</title>
+  <title>Jourmore | JourLab</title>
   <link rel="icon" href="/jscss/favicon.ico" type="image/x-icon">
 
   <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="/jscss/jemdoc.css" type="text/css" />
   <link rel="stylesheet" href='/jscss/bootstrap.min.css'>
@@ -18,217 +19,638 @@
   <script src="/jscss/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <style>
+    /* ========== 全局重置与基础 ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; padding: 0;
+      background: #f4f6f9;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, "Times New Roman", serif;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ========== 顶部导航栏 ========== */
+    #top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: linear-gradient(135deg, #0d47a1 0%, #1976d2 60%, #42a5f5 100%);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 52px;
+    }
+    #top-navbar .nav-brand {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    #top-navbar .nav-brand span { color: #ffd54f; }
+    #top-navbar .nav-links a {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    #top-navbar .nav-links a:hover { color: #ffd54f; border-bottom: none; }
+
+    /* ========== 主体页面包裹 ========== */
+    #page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 0;
+    }
+
+    /* ========== 左右布局 — 1:4 固定比例 ========== */
+    #tlayout {
+      display: flex !important;
+      width: 100%;
+      border: none !important;
+      border-collapse: unset !important;
+      background: transparent !important;
+      gap: 20px;
+      table-layout: fixed;
+    }
+    #tlayout tr {
+      display: flex;
+      width: 100%;
+    }
+
+    /* 左侧菜单：20% */
+    #layout-menu {
+      width: 20% !important;
+      min-width: 160px;
+      max-width: 220px;
+      flex-shrink: 0;
+      background: #fff;
+      border: 1px solid #e0e4ea;
+      border-radius: 12px;
+      padding: 18px 14px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      position: sticky;
+      top: 68px;
+      height: fit-content;
+      font-size: 0.95rem;
+      white-space: normal !important;
+    }
+
+    /* 右侧内容：80% */
+    #layout-content {
+      flex: 1;
+      width: 80% !important;
+      min-width: 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 32px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      font-size: 1rem;
+      vertical-align: top;
+    }
+
+    /* ========== 左侧菜单内部样式 ========== */
+    .menu-category {
+      border-bottom: 2px solid #e3eaf5;
+      margin-top: 0;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 1rem !important;
+      font-weight: 700;
+      color: #0d47a1;
+      letter-spacing: 0.5px;
+    }
+    .menu-category b { font-size: 1rem; }
+
+    .menu-item {
+      padding: 4px 0;
+      font-size: 0.92rem !important;
+      text-indent: 0 !important;
+    }
+    .menu-item a {
+      color: #1565c0 !important;
+      text-decoration: none;
+      display: block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+      font-size: 0.92rem;
+    }
+    .menu-item a:hover {
+      background: #e8f0fe;
+      color: #0d47a1 !important;
+      border-bottom: none !important;
+    }
+
+    /* NEWS 区块 */
+    .news-block {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #fff8e1, #fffde7);
+      border-left: 3px solid #ffa000;
+      border-radius: 8px;
+      padding: 10px 10px 8px;
+    }
+    .news-block .news-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #e65100;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .news-block .news-item {
+      font-size: 0.8rem;
+      color: #5d4037;
+      line-height: 1.5;
+    }
+
+    /* ========== Banner ========== */
+    .banner-wrapper {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .banner-wrapper img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    /* 轮播图 — 覆盖在 Banner 右上角 */
+    #carouselExampleInterval {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 170px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+      border: 2px solid rgba(255,255,255,0.7);
+      z-index: 10;
+    }
+    #carouselExampleInterval .carousel-item img {
+      height: 160px;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    /* ========== Welcome 标题区 ========== */
+    .welcome-section {
+      background: linear-gradient(135deg, #e3f2fd 0%, #fafafa 100%);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 22px;
+      border-left: 4px solid #1976d2;
+    }
+    .welcome-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0077C2;
+      margin: 0 0 8px;
+    }
+    .welcome-title b { color: #0d47a1; }
+    .welcome-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .tag {
+      background: #e8f0fe;
+      color: #1a5276;
+      border-radius: 20px;
+      padding: 3px 13px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid #c5d8f8;
+    }
+
+    /* ========== Section 标题 ========== */
+    h1 {
+      font-size: 1.35rem !important;
+      color: #bb2649 !important;
+      font-weight: 700;
+      border-bottom: 2px solid #f5c6d0;
+      padding-bottom: 6px;
+      margin-top: 28px !important;
+      margin-bottom: 14px !important;
+    }
+    h2 {
+      font-size: 1.05rem !important;
+      color: #0d47a1 !important;
+      font-weight: 600;
+      margin-top: 16px !important;
+      margin-bottom: 6px !important;
+    }
+    h3 {
+      font-size: 0.98rem !important;
+      color: #019b98 !important;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    /* ========== Research 卡片 ========== */
+    .research-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: #f9fbff;
+      border: 1px solid #dde8f8;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      transition: box-shadow 0.2s;
+    }
+    .research-card:hover { box-shadow: 0 4px 18px rgba(13,71,161,0.10); }
+    .research-card img {
+      width: 140px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+      border: 1px solid #cdd8f0;
+    }
+    .research-card-body h4 {
+      color: #019b98;
+      font-weight: 600;
+      margin: 0 0 8px;
+      font-size: 0.97rem;
+    }
+    .research-card-body li {
+      color: #444;
+      margin-bottom: 3px;
+      font-size: 0.92rem;
+    }
+
+    /* ========== Publications ========== */
+    .pub-list { list-style: none; padding: 0; margin: 0; }
+    .pub-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      background: #fafbff;
+      border-left: 3px solid #90caf9;
+      transition: background 0.18s, border-color 0.18s;
+      font-size: 0.91rem;
+      line-height: 1.55;
+    }
+    .pub-item:hover { background: #e8f0fe; border-left-color: #1976d2; }
+    .pub-item.under-review {
+      border-left-color: #ffcc80;
+      background: #fffde7;
+    }
+    .pub-num {
+      min-width: 32px;
+      font-weight: 700;
+      color: #1565c0;
+      font-size: 0.88rem;
+      padding-top: 1px;
+    }
+    .pub-text { flex: 1; }
     .journal {
-      color: #3F51B5;
-      font-weight: normal;
+      color: #1565c0;
+      font-weight: 600;
       font-style: italic;
+    }
+    .pub-link {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 8px;
+      background: #1976d2;
+      color: #fff !important;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      text-decoration: none;
+      vertical-align: middle;
+      transition: background 0.18s;
+    }
+    .pub-link:hover { background: #0d47a1; border-bottom: none !important; }
+    .badge-first { background: #e53935; color: #fff; font-size: 0.72rem; border-radius: 8px; padding: 1px 7px; margin-right: 5px; vertical-align: middle; }
+    .badge-co { background: #f57c00; color: #fff; font-size: 0.72rem; border-radius: 8px; padding: 1px 7px; margin-right: 5px; vertical-align: middle; }
+
+    /* ========== Links 区域 ========== */
+    .link-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e3f2fd;
+      border: 1px solid #bbdefb;
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin: 6px 6px 0 0;
+      text-decoration: none;
+      color: #0d47a1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.18s, box-shadow 0.18s;
+    }
+    .link-card:hover { background: #bbdefb; box-shadow: 0 2px 10px rgba(13,71,161,0.12); border-bottom: none !important; }
+
+    /* Social profile badges */
+    .social-badges { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .social-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .social-badge:hover { opacity: 0.82; border-bottom: none !important; }
+    .badge-orcid { background: #a6ce39; color: #fff; }
+    .badge-rg { background: #00d0af; color: #fff; }
+    .badge-gh { background: #24292e; color: #fff; }
+
+    /* Contact block */
+    .contact-block {
+      background: #f0f4ff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 0.92rem;
+      color: #333;
+      border: 1px solid #dde8f8;
+    }
+    .contact-block a { color: #1565c0; }
+
+    /* ========== Footer ========== */
+    #footer {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      padding: 16px 16px 12px;
+      border-top: 1px solid #dde3eb;
+      font-size: 0.82rem;
+      color: #999;
+      text-align: center;
+    }
+    #footer a { color: #aac4e8; }
+    #footer a:hover { color: #1976d2; border-bottom: none; }
+
+    /* ========== 回顶部 ========== */
+    .go-top {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 5px 16px;
+      background: #e8f0fe;
+      color: #1565c0;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .go-top:hover { background: #bbdefb; border-bottom: none !important; }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 768px) {
+      #tlayout, #tlayout tr { flex-direction: column; }
+      #layout-menu { width: 100% !important; max-width: 100%; position: static; }
+      #layout-content { width: 100% !important; padding: 16px; }
+      #carouselExampleInterval { width: 120px; top: 8px; right: 8px; }
+      #carouselExampleInterval .carousel-item img { height: 110px; }
+      .research-card { flex-direction: column; }
+      .research-card img { width: 100%; height: 140px; }
+    }
+    @media print {
+      #layout-menu { display: none; }
+      #top-navbar { display: none; }
     }
   </style>
 </head>
 
 <body>
-  <table summary="Table for page layout." id="tlayout">
-    <tr valign="top">
-      <td id="layout-menu">
-        <div class="menu-category"><b>Menu &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</b></div>
-        <!-- <div class="menu-item"><a href="index.html" class="current">Home</a></div> -->
-        <div class="menu-item"><a href="#research">1.Research</a></div>
-        <div class="menu-item"><a href="#publication">2.Publication</a></div>
-        <!-- <div class="menu-item"><a href="#resource">3.Resources</a></div> -->
-        <div class="menu-item"><a href="#link">3.Links</a></div>
-<!--         <div class="menu-item"><a href="#about">5.About</a></div>
-        <div class="menu-item"><a href="publications.html">Publications</a></div>
-        <div class="menu-item"><a href="software.html">Software</a></div>
-        <div class="menu-item"><a href="news.html">News</a></div>
-        <div class="menu-item"><a href="index.html#contact">Contact</a></div>
-        <div class="menu-item"><a href="#contact">Contact</a></div> -->
-        <br>
-        <div class="menu-category">
-          <h3 class="color:#bb2649;">
-            <b>NEWs &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</b>
-          </h3>
-          <h4 class="color:#bb2649;">
-            <b>[2026.06.30] Graduation, Employment, Establishment.</b>
-          </h4>
 
-        </div>
-      </td>
+  <!-- ===== 顶部导航栏 ===== -->
+  <div id="top-navbar">
+    <a class="nav-brand" href="#">Jour<span>Lab</span></a>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#publication">Publications</a>
+      <a href="#link">Links</a>
+    </div>
+  </div>
 
-      <td id="layout-content">
-        <div style="position: relative;text-align: center;color: black;">
-          <img src="images/banner.png" style="float: left; margin:0px 0em 1em 0px" alt="banner" width="100%"/>
-        </div>
+  <div id="page-wrapper">
+    <table summary="Table for page layout." id="tlayout">
+      <tr valign="top">
 
-        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel" style="width: 200px; position: absolute; top: 350px; right: 30px; z-index: 1000;">
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="2500">
-              <img class="d-block w-100" src="images/profile1.png" alt="TOC" style="height: 200px">
-            </div>
-            <div class="carousel-item" data-interval="2500">
-              <img class="d-block w-100" src="images/profile2.png" alt="MD" style="height: 200px">
-            </div>
-            <div class="carousel-item" data-interval="2500">
-              <img class="d-block w-100" src="images/profile3.png" alt="ML" style="height: 200px;">
-            </div>
-            <div class="carousel-item" data-interval="2500">
-              <img class="d-block w-100" src="images/profile4.png" alt="Web" style="height: 200px">
+        <!-- ===== 左侧菜单 ===== -->
+        <td id="layout-menu">
+          <div class="menu-category">Menu</div>
+          <div class="menu-item"><a href="#research">&#x1F52C; Research</a></div>
+          <div class="menu-item"><a href="#publication">&#x1F4DA; Publications</a></div>
+          <div class="menu-item"><a href="#link">&#x1F517; Links</a></div>
+
+          <div class="news-block">
+            <div class="news-title">&#x1F4E2; News</div>
+            <div class="news-item">
+              <strong>[2026.06.30]</strong><br/>
+              Graduation, Employment &amp; Establishment.
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+        </td>
 
+        <!-- ===== 右侧内容 ===== -->
+        <td id="layout-content">
 
-        <div style="font-size: 2.5rem; color: #0077C2;">
-          Welcome to <b>JourLab</b>
-        </div>
+          <!-- Banner + 轮播 -->
+          <div class="banner-wrapper">
+            <img src="images/banner.png" alt="JourLab Banner" />
 
-        <br>
-        <h2>Bioinformatics and Cheminformatics</h2>
-        <h4>1. Machine learning (ML) & Deep learning (DL) </h4>
-        <h4>2. Molecular dynamics simulations (MD) </h4>
-        <h4>3. Database & Tool & Web </h4>
-        <br>
-
-        <h1 id="research" class="color:#bb2649;">1.Research</h1>
-
-        <br>
-        <h4 class="color:#019b98;">
-          Computer-Aided Drug Screening and Design (CADD & AIDD & MD)
-        </h4>
-
-     <div style="float: right; margin:0px 2em 0em 0px">
-            <img src="images/2previous.jpg" height="150"/>
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="2500">
+                  <img class="d-block w-100" src="images/profile1.png" alt="TOC">
+                </div>
+                <div class="carousel-item" data-interval="2500">
+                  <img class="d-block w-100" src="images/profile2.png" alt="MD">
+                </div>
+                <div class="carousel-item" data-interval="2500">
+                  <img class="d-block w-100" src="images/profile3.png" alt="ML">
+                </div>
+                <div class="carousel-item" data-interval="2500">
+                  <img class="d-block w-100" src="images/profile4.png" alt="Web">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
           </div>
-          
-          <br>
-            <p>
-              <li> Computational Toxicology & Network Toxicology & Network Pharmacology</li>
-            </p>
-            <p>
-              <li> Computer-Aided Drug Screening and Design </li>
-            </p>
 
-        <br>
-        <h4 class="color:#019b98;">
-          Computer-Aided Binder Design (Protein & Nanobody)
-        </h4>
+          <!-- Welcome -->
+          <div class="welcome-section">
+            <div class="welcome-title">Welcome to <b>JourLab</b></div>
+            <div style="color:#555; font-size:0.95rem;">Bioinformatics &amp; Cheminformatics</div>
+            <div class="welcome-tags">
+              <span class="tag">&#x1F916; Machine Learning &amp; Deep Learning</span>
+              <span class="tag">&#x2699;&#xFE0F; Molecular Dynamics Simulations</span>
+              <span class="tag">&#x1F310; Database &amp; Tool &amp; Web</span>
+            </div>
+          </div>
 
-        <div style="float: right; margin:0px 2em 0em 0px">
-          <img src="images/3more.jpg" height="150"/>
-        </div>
+          <!-- ===== Research ===== -->
+          <h1 id="research">1. Research</h1>
 
-            <p>
-              <li> Targeting Binder Screening and Analysis </li>
-            </p>
-            <p>
-              <li> Targeting Binder Inverse Folding and Generation </li>
-            </p>
+          <div class="research-card">
+            <img src="images/2previous.jpg" alt="CADD" />
+            <div class="research-card-body">
+              <h4>Computer-Aided Drug Screening and Design (CADD &amp; AIDD &amp; MD)</h4>
+              <ul style="padding-left:18px; margin:0;">
+                <li>Computational Toxicology &amp; Network Toxicology &amp; Network Pharmacology</li>
+                <li>Computer-Aided Drug Screening and Design</li>
+              </ul>
+            </div>
+          </div>
 
-        
+          <div class="research-card">
+            <img src="images/3more.jpg" alt="Nanobody" />
+            <div class="research-card-body">
+              <h4>Computer-Aided Binder Design (Protein &amp; Nanobody)</h4>
+              <ul style="padding-left:18px; margin:0;">
+                <li>Targeting Binder Screening and Analysis</li>
+                <li>Targeting Binder Inverse Folding and Generation</li>
+              </ul>
+            </div>
+          </div>
 
-      <h1 id="publication" class="color:#bb2649;">2.Publications</h1>
-        <li>[1] <b>Mao J</b>, Song Y, Kong M, Guo Y, Liu Y, Pu X. <span class="journal">ACS Applied Materials & Interfaces</span>. 2026 Feb 4;18(4):6433-6451.<a href="https://doi.org/10.1021/acsami.5c19073" target="_blank">link</a></li>
+          <!-- ===== Publications ===== -->
+          <h1 id="publication">2. Publications</h1>
 
-        <li>[2] <b>Mao J</b>, Luo QQ, Zhang HR, Zheng XH, Shen C, Qi HZ, Hu ML, Zhang H. <span class="journal">Chemico-Biological Interactions</span>. 2022 Jan 25;352:109784.<a href="https://doi.org/10.1016/j.cbi.2021.109784" target="_blank">link</a></li>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <span class="pub-num">[1]</span>
+              <span class="pub-text"><span class="badge-first">First</span><b>Mao J</b>, Song Y, Kong M, Guo Y, Liu Y, Pu X. <span class="journal">ACS Applied Materials &amp; Interfaces</span>. 2026 Feb 4;18(4):6433-6451.<a class="pub-link" href="https://doi.org/10.1021/acsami.5c19073" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[2]</span>
+              <span class="pub-text"><span class="badge-first">First</span><b>Mao J</b>, Luo QQ, Zhang HR, Zheng XH, Shen C, Qi HZ, Hu ML, Zhang H. <span class="journal">Chemico-Biological Interactions</span>. 2022 Jan 25;352:109784.<a class="pub-link" href="https://doi.org/10.1016/j.cbi.2021.109784" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[3]</span>
+              <span class="pub-text"><span class="badge-co">Co-1st</span>Pan CC, Yang CM, <b>Mao J</b>*. <span class="journal">Asian Journal of Psychiatry</span>. 2025 Sep;111:104674.<a class="pub-link" href="https://doi.org/10.1016/j.ajp.2025.104674" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[4]</span>
+              <span class="pub-text">Yang MH, <b>Mao J</b>#, Zhu JH, Zhang H, Ding L. <span class="journal">Life Sciences</span>. 2022 Apr 30:120583.<a class="pub-link" href="https://doi.org/10.1016/j.lfs.2022.120583" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[5]</span>
+              <span class="pub-text">Li YL, <b>Mao J</b>#, Tian XF, Song H, Ren JX. <span class="journal">Journal of Molecular Structure</span>. 2025 Mar 5;1324:140905.<a class="pub-link" href="https://doi.org/10.1016/j.molstruc.2024.140905" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[6]</span>
+              <span class="pub-text">Li YL, <b>Mao J</b>#, Cheng Z, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="journal">Molecular Diversity</span>. 2026 Feb;30(1):571-593.<a class="pub-link" href="https://doi.org/10.1007/s11030-025-11185-8" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[7]</span>
+              <span class="pub-text">Li YL, <b>Mao J</b>#, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="journal">Molecular Diversity</span>. 2026 Apr 4. PMID: 41934566.<a class="pub-link" href="https://doi.org/10.1007/s11030-026-11531-4" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[8]</span>
+              <span class="pub-text">Zhang H, <b>Mao J</b>#, Qi HZ, Xie HZ, Shen C, Liu CT, Ding L. <span class="journal">Food and Chemical Toxicology</span>. 2020 Sep;143:111513.<a class="pub-link" href="https://doi.org/10.1016/j.fct.2020.111513" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[9]</span>
+              <span class="pub-text">Zhang H, <b>Mao J</b>#, Yang YL, Liu CT, Shen C, Zhang HR, Xie HZ, Ding L. <span class="journal">Journal of Cellular Biochemistry</span>. 2021 Nov;122(11):1609-1624.<a class="pub-link" href="https://doi.org/10.1002/jcb.30077" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[10]</span>
+              <span class="pub-text">Zhang H, <b>Mao J</b>#, Qi HZ, Ding L. <span class="journal">Molecular Diversity</span>. 2020 Nov;24(4):1281-1290.<a class="pub-link" href="https://doi.org/10.1007/s11030-019-09991-y" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[11]</span>
+              <span class="pub-text">Kong M, Chen X, <b>Mao J</b>, Yu J, Song YP, Guo YZ, Pu XM. <span class="journal">Journal of Chemical Theory and Computation</span>. 2025 Oct 14;21(19):9669-9686.<a class="pub-link" href="https://doi.org/10.1021/acs.jctc.5c00935" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[12]</span>
+              <span class="pub-text">Hu J, Yang SR, <b>Mao J</b>, Shi CJ, Wang GC, Liu YJ, Pu XM. <span class="journal">Journal of Alloys and Compounds</span>. 2023, 947, 169479.<a class="pub-link" href="https://doi.org/10.1016/j.jallcom.2023.169479" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[13]</span>
+              <span class="pub-text">Zhang H, Qi HZ, <b>Mao J</b>, Zhang HR, Luo QQ, Hu ML, Shen C, Ding L. <span class="journal">Bioorganic Chemistry</span>. 2022 Mar 12;122:105722.<a class="pub-link" href="https://doi.org/10.1016/j.bioorg.2022.105722" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[14]</span>
+              <span class="pub-text">Zhang H, Liu CT, <b>Mao J</b>, Shen C, Xie RL, Mu B. <span class="journal">Toxicology in Vitro</span>. 2020 Jun;65:104812.<a class="pub-link" href="https://doi.org/10.1016/j.tiv.2020.104812" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[15]</span>
+              <span class="pub-text">Zhang H, Shen C, Liu RZ, <b>Mao J</b>, Liu CT, Mu B. <span class="journal">Journal of Applied Toxicology</span>. 2020 Sep;40(9):1198-1209.<a class="pub-link" href="https://doi.org/10.1002/jat.3975" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub-num">[16]</span>
+              <span class="pub-text">Chen X, Wang K, Chen J, Wu C, <b>Mao J</b>, Song Y, Liu Y, Shao Z, Pu X. <span class="journal">Nature Communications</span>. 2024 Sep 16;15(1):8130.<a class="pub-link" href="https://doi.org/10.1038/s41467-024-52399-y" target="_blank">link</a></span>
+            </li>
+            <li class="pub-item under-review">
+              <span class="pub-num">[17]</span>
+              <span class="pub-text"><b>First Author</b> <em style="color:#e65100;">[Under Review]</em> — A Computational Platform for Hapten-Specific Nanobody Engineering: Integrating Pocket Database, Screening and Analysis.</span>
+            </li>
+            <li class="pub-item under-review">
+              <span class="pub-num">[18]</span>
+              <span class="pub-text"><b>Co-first Author</b> <em style="color:#e65100;">[Under Review]</em> — Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.</span>
+            </li>
+          </ul>
 
-        <li>[3] Pan CC, Yang CM, <b>Mao J</b>*. <span class="journal">Asian Journal of Psychiatry</span>. 2025 Sep;111:104674.<a href="https://doi.org/10.1016/j.ajp.2025.104674" target="_blank">link</a></li>
+          <!-- ===== Links ===== -->
+          <h1 id="link">3. Links</h1>
 
-        <li>[4] Yang MH, <b>Mao J</b>#, Zhu JH, Zhang H, Ding L. <span class="journal">Life Sciences</span>. 2022 Apr 30:120583.<a href="https://doi.org/10.1016/j.lfs.2022.120583" target="_blank">link</a></li>
+          <h3>For Antibody &amp; Nanobody</h3>
+          <div>
+            <a class="link-card" href="http://1.15.44.91:800/" target="_blank">
+              &#x1F4E6; Antibody Drug Development Resource Navigator (AntibodyHub Pro)
+            </a>
+          </div>
 
-        <li>[5] Li YL, <b>Mao J</b>#, Tian XF, Song H, Ren JX. <span class="journal">Journal of Molecular Structure</span>. 2025 Mar 5;1324:140905.<a href="https://doi.org/10.1016/j.molstruc.2024.140905" target="_blank">link</a></li>
+          <!-- 联系与社交 -->
+          <div class="contact-block">
+            <div style="margin-bottom:6px;">
+              <strong>Jourmore</strong> &nbsp;|&nbsp; <a href="mailto:maojun@stu.scu.edu.cn">maojun@stu.scu.edu.cn</a>
+            </div>
+            <div class="social-badges">
+              <a class="social-badge badge-orcid" href="https://orcid.org/0000-0002-5648-9269" target="_blank">&#x1F9EC; ORCID</a>
+              <a class="social-badge badge-rg" href="https://www.researchgate.net/profile/Mao-Jun/research" target="_blank">&#x1F4C8; ResearchGate</a>
+              <a class="social-badge badge-gh" href="https://github.com/jourmore/" target="_blank">&#x1F431; GitHub</a>
+            </div>
+          </div>
 
-        <li>[6] Li YL, <b>Mao J</b>#, Cheng Z, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="journal">Molecular Diversity</span>. 2026 Feb;30(1):571-593.<a href="https://doi.org/10.1007/s11030-025-11185-8" target="_blank">link</a></li>
+          <br/>
+          <a class="go-top" href="#top-navbar">&#x2191; Go to Top</a>
 
-        <li>[7] Li YL, <b>Mao J</b>#, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="journal">Molecular Diversity</span>. 2026 Apr 4. PMID: 41934566.<a href="https://doi.org/10.1007/s11030-026-11531-4" target="_blank">link</a></li>
-
-        <li>[8] Zhang H, <b>Mao J</b>#, Qi HZ, Xie HZ, Shen C, Liu CT, Ding L. <span class="journal">Food and Chemical Toxicology</span>. 2020 Sep;143:111513.<a href="https://doi.org/10.1016/j.fct.2020.111513" target="_blank">link</a></li>
-
-        <li>[9] Zhang H, <b>Mao J</b>#, Yang YL, Liu CT, Shen C, Zhang HR, Xie HZ, Ding L. <span class="journal">Journal of Cellular Biochemistry</span>. 2021 Nov;122(11):1609-1624.<a href="https://doi.org/10.1002/jcb.30077" target="_blank">link</a></li>
-
-        <li>[10] Zhang H, <b>Mao J</b>#, Qi HZ, Ding L. <span class="journal">Molecular Diversity</span>. 2020 Nov;24(4):1281-1290.<a href="https://doi.org/10.1007/s11030-019-09991-y" target="_blank">link</a></li>
-
-        <li>[11] Kong M, Chen X, <b>Mao J</b>, Yu J, Song YP, Guo YZ, Pu XM. <span class="journal">Journal of Chemical Theory and Computation</span>. 2025 Oct 14;21(19):9669-9686. <a href="https://doi.org/10.1021/acs.jctc.5c00935" target="_blank">link</a>
-
-        <li>[12]  Hu J, Yang SR, <b>Mao J</b>, Shi CJ, Wang GC, Liu YJ, Pu XM. <span class="journal">Journal of Alloys and Compounds</span>. 2023, 947, 169479.<a href="https://doi.org/10.1016/j.jallcom.2023.169479" target="_blank">link</a></li>
-
-        <li>[13]  Zhang H, Qi HZ, <b>Mao J</b>, Zhang HR, Luo QQ, Hu ML, Shen C, Ding L. <span class="journal">Bioorganic Chemistry</span>. 2022 Mar 12;122:105722.<a href="https://doi.org/10.1016/j.bioorg.2022.105722" target="_blank">link</a></li>
-
-        <li>[14]  Zhang H, Liu CT, <b>Mao J</b>, Shen C, Xie RL, Mu B. <span class="journal">Toxicology in Vitro</span>. 2020 Jun;65:104812.<a href="https://doi.org/10.1016/j.tiv.2020.104812" target="_blank">link</a></li>
-
-        <li>[15]  Zhang H, Shen C, Liu RZ, <b>Mao J</b>, Liu CT, Mu B. <span class="journal">Journal of Applied Toxicology</span>. 2020 Sep;40(9):1198-1209.<a href="https://doi.org/10.1002/jat.3975" target="_blank">link</a></li>
-
-        <li>[16]  Chen X, Wang K, Chen J, Wu C, <b>Mao J</b>, Song Y, Liu Y, Shao Z, Pu X. <span class="journal">Nature Communications</span>. 2024 Sep 16;15(1):8130.<a href="https://doi.org/10.1038/s41467-024-52399-y" target="_blank">link</a></li>
-
-        <li>[17]  <b>First author 1</b> [Under Review] (A Computational Platform for Hapten-Specific Nanobody Engineering: Integrating Pocket Database, Screening and Analysis)</li>
-
-        <li>[18]  <b>Co-first Author 2</b> [Under Review] (Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.)</li>
-
-        <!-- <li>[16]  <span class="journal">Patent</span>: ZL202211500668.3，2023.9.8.</li> -->
-
-      <h1 id="resource" class="color:#bb2649;">3.Software & Webserver</h1>
-        <li>[1] NBsTem: Nanobody Thermostability Prediction<a href="https://www.nbscal.online/" target="_blank">link</a></li>
-        <li>[2] NBsPocket: Hapten-Specific Nanobody Pocket Database, Screening and Analysis<a href="https://www.nbspocket.online/" target="_blank">link</a></li>
-
-
-      <h1 id="link" class="color:#bb2649;">3.Links</h1>
-        <h3>For Antibody & Nanobody </h3>
-        <li>Antibody Drug Development Resource Navigator (AntibodyHub Pro).<a href="http://1.15.44.91:800/" target="_blank">link</a></li>
-        
-<!--           <li>[1] SAbDab: a database containing all the antibody structures available in the PDB.<a href="https://opig.stats.ox.ac.uk/webapps/sabdab-sabpred/sabdab" target="_blank">link</a></li>
-          <li>[2] SAbDab-nano: a sub-database of SAbDab containing all single-domain antibody structures available in the PDB.<a href="https://opig.stats.ox.ac.uk/webapps/sabdab-sabpred/sabdab/nano/" target="_blank">link</a></li>
-          <li>[3] SAbPred: a collection of computational tools that make predictions about the properties of antibodies, focusing on their structures.<a href="https://opig.stats.ox.ac.uk/webapps/sabdab-sabpred/sabpred/" target="_blank">link</a></li> -->
-        <br>
-        <!-- <p class="color:#5f5f5f;">[Other links will be released after being sorted out.]</p> -->
-
-
-
-<!--         <h1 id="about">5.About</h1>
-
-        <li>Bioinformatics and Cheminformatics in Chengdu Medical University</li>
-        <p> 2026-now: Faculty Position (Teaching & Research)</p>
-        <li>Bioinformatics and Cheminformatics in SiChuan University</li>
-        <p> 2022-2026: PhD</p>
-        <li>Biochemistry and Molecular Biology, Computer-aided drug design & Computational toxicology</li>
-        <p> 2019-2022: Master</p>
-        <li>Bioinformatics in Zhejiang University</li>
-        <p> 2017-2019: Research Assistant</p>
-        <li>Biotechnology, Genetic engineering & Cell engineering</li>
-        <p>2014-2018: Undergraduate</p>
-        <br>
- -->
-        <p>
-          Jourmore<br/>
-          maojun@stu.scu.edu.cn <br/>
-        </p>
-
-        <h4 class="color:#e9aa2b;">
-          You can follow me on <a href="https://orcid.org/0000-0002-5648-9269" target="_blank">ORCID</a>, <a href="https://www.researchgate.net/profile/Mao-Jun/research" target="_blank">ResearchGate</a> and <a href="https://github.com/jourmore/" target="_blank">Github</a>. 
-        </h4>
-
-        <br><a href="#tlayout">Go to Top</a><br>
-
-      </td>
-    </tr>
-  </table>
-
-</div><!-- #wrapper -->
+        </td>
+      </tr>
+    </table>
+  </div><!-- #page-wrapper -->
 
   <div id="footer" role="contentinfo">
     <div id="colophon">
-
       <div id="theme-credits">
         <p id="footer-copyright">
-          <span class="footer-notice"> JourLab &copy; 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>.</span></p>
-      </div><!-- #theme-credits -->
-    </div><!-- #colophon -->
-      </div><!-- #footer -->
+          <span class="footer-notice">JourLab &copy; 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>.</span>
+        </p>
+      </div>
+    </div>
+  </div>
 
   <script src='/jscss/bootstrap.bundle.min.js'></script>
 
