@@ -62,6 +62,32 @@
     }
     #top-navbar .nav-links a:hover { color: #ffd54f; border-bottom: none; }
 
+    /* ========== 语言切换按钮 ========== */
+    #lang-toggle {
+      margin-left: 22px;
+      padding: 4px 14px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.55);
+      border-radius: 20px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    #lang-toggle:hover {
+      background: rgba(255,213,79,0.22);
+      border-color: #ffd54f;
+      color: #ffd54f;
+      border-bottom: none !important;
+    }
+
     /* ========== 主体页面包裹 ========== */
     #page-wrapper {
       max-width: 1800px;
@@ -458,10 +484,11 @@
   <div id="top-navbar">
     <a class="nav-brand" href="#">Jour<span>Lab</span></a>
     <div class="nav-links">
-      <a href="#research">Research</a>
-      <a href="#publication">Publications</a>
-      <a href="#link">Links</a>
-      <a href="#contact">Contact</a>
+      <a href="#research"   data-en="Research"     data-zh="研究方向">Research</a>
+      <a href="#publication" data-en="Publications" data-zh="研究成果">Publications</a>
+      <a href="#link"       data-en="Links"         data-zh="相关链接">Links</a>
+      <a href="#contact"    data-en="Contact"       data-zh="联系我们">Contact</a>
+      <a id="lang-toggle" href="#" onclick="toggleLang(event)">🌐 中文</a>
     </div>
   </div>
 
@@ -471,17 +498,17 @@
 
         <!-- ===== 左侧菜单 ===== -->
         <td id="layout-menu">
-          <div class="menu-category">Menu</div>
-          <div class="menu-item"><a href="#research">&#x1F52C; Research</a></div>
-          <div class="menu-item"><a href="#publication">&#x1F4DA; Publications</a></div>
-          <div class="menu-item"><a href="#link">&#x1F517; Links</a></div>
-          <div class="menu-item"><a href="#contact">&#x1F517; Contact</a></div>
+          <div class="menu-category" data-en="Menu" data-zh="页面导航">Menu</div>
+          <div class="menu-item"><a href="#research"    data-en="&#x1F52C; Research"    data-zh="&#x1F52C; 研究方向">&#x1F52C; Research</a></div>
+          <div class="menu-item"><a href="#publication" data-en="&#x1F4DA; Publications" data-zh="&#x1F4DA; 研究成果">&#x1F4DA; Publications</a></div>
+          <div class="menu-item"><a href="#link"        data-en="&#x1F517; Links"        data-zh="&#x1F517; 相关链接">&#x1F517; Links</a></div>
+          <div class="menu-item"><a href="#contact"     data-en="&#x1F517; Contact"      data-zh="&#x1F517; 联系我们">&#x1F517; Contact</a></div>
 
           <div class="news-block">
-            <div class="news-title">&#x1F4E2; News</div>
+            <div class="news-title" data-en="&#x1F4E2; News" data-zh="&#x1F4E2; 动态">&#x1F4E2; News</div>
             <div class="news-item">
               <strong>[2026.06.30]</strong><br/>
-              Graduation, Employment &amp; Establishment.
+              <span data-en="Employment &amp; Establishment." data-zh="入职，实验室建立。">Graduation, Employment &amp; Establishment.</span>
             </div>
           </div>
         </td>
@@ -499,11 +526,19 @@
             <!-- Welcome -->
             <div class="welcome-section">
               <div class="welcome-title">Welcome to <b>JourLab</b></div>
-              <div style="color:#bb2649; font-size:2rem;">Bioinformatics &amp; Cheminformatics</div>
+              <div style="color:#bb2649; font-size:2rem;"
+                   data-en="Bioinformatics &amp; Cheminformatics"
+                   data-zh="生物信息学 &amp; 化学信息学">Bioinformatics &amp; Cheminformatics</div>
               <div class="welcome-tags">
-                <span class="tag">&#x1F916; Machine Learning &amp; Deep Learning</span>
-                <span class="tag">&#x2699;&#xFE0F; Molecular Dynamics Simulations</span>
-                <span class="tag">&#x1F310; Database &amp; Tool &amp; Web</span>
+                <span class="tag"
+                      data-en="&#x1F916; Machine Learning &amp; Deep Learning"
+                      data-zh="&#x1F916; 机器学习 &amp; 深度学习">&#x1F916; Machine Learning &amp; Deep Learning</span>
+                <span class="tag"
+                      data-en="&#x2699;&#xFE0F; Molecular Dynamics Simulations"
+                      data-zh="&#x2699;&#xFE0F; 分子动力学模拟">&#x2699;&#xFE0F; Molecular Dynamics Simulations</span>
+                <span class="tag"
+                      data-en="&#x1F310; Database &amp; Tool &amp; Web"
+                      data-zh="&#x1F310; 数据库 &amp; 工具 &amp; 网站">&#x1F310; Database &amp; Tool &amp; Web</span>
               </div>
             </div>
 
@@ -535,15 +570,18 @@
           </div>
 
           <!-- ===== Research ===== -->
-          <h1 id="research">1. Research</h1>
+          <h1 id="research" data-en="1. Research" data-zh="1. 研究方向">1. Research</h1>
 
           <div class="research-card">
             <img src="images/2previous.jpg" alt="CADD" />
             <div class="research-card-body">
-              <h2>Computer-Aided Drug Screening and Design (CADD &amp; AIDD &amp; MD)</h2>
+              <h2 data-en="Computer-Aided Drug Screening and Design (CADD &amp; AIDD &amp; MD)"
+                  data-zh="计算机辅助药物筛选与设计（CADD &amp; AIDD &amp; MD）">Computer-Aided Drug Screening and Design (CADD &amp; AIDD &amp; MD)</h2>
               <ul style="padding-left:18px; margin:0; font-size: 300%">
-                <li>Computational Toxicology &amp; Network Toxicology &amp; Network Pharmacology</li>
-                <li>Computer-Aided Drug Screening and Design</li>
+                <li data-en="Computational Toxicology &amp; Network Toxicology &amp; Network Pharmacology"
+                    data-zh="计算毒理学 &amp; 网络毒理学 &amp; 网络药理学">Computational Toxicology &amp; Network Toxicology &amp; Network Pharmacology</li>
+                <li data-en="Computer-Aided Drug Screening and Design"
+                    data-zh="计算机辅助药物筛选与设计">Computer-Aided Drug Screening and Design</li>
               </ul>
             </div>
           </div>
@@ -551,16 +589,19 @@
           <div class="research-card">
             <img src="images/3more.jpg" alt="Nanobody" />
             <div class="research-card-body">
-              <h2>Computer-Aided Binder Design (Protein &amp; Nanobody)</h2>
+              <h2 data-en="Computer-Aided Binder Design (Protein &amp; Nanobody)"
+                  data-zh="计算机辅助结合蛋白设计（蛋白质 &amp; 纳米抗体）">Computer-Aided Binder Design (Protein &amp; Nanobody)</h2>
               <ul style="padding-left:18px; margin:0; font-size: 300%">
-                <li>Targeting Binder Screening and Analysis</li>
-                <li>Targeting Binder Inverse Folding and Generation</li>
+                <li data-en="Targeting Binder Screening and Analysis"
+                    data-zh="靶向结合蛋白筛选与分析">Targeting Binder Screening and Analysis</li>
+                <li data-en="Targeting Binder Inverse Folding and Generation"
+                    data-zh="靶向结合蛋白生成与逆折叠">Targeting Binder Inverse Generation and Folding</li>
               </ul>
             </div>
           </div>
 
           <!-- ===== Publications ===== -->
-          <h1 id="publication">2. Publications</h1>
+          <h1 id="publication" data-en="2. Publications" data-zh="2. 研究成果">2. Publications</h1>
 
           <ul class="pub-list">
             <li class="pub-item">
@@ -629,29 +670,30 @@
             </li>
             <li class="pub-item">
               <span class="pub-num">[17]</span>
-              <span class="pub-text"><b>Fourth inventor</b> — 基于深度学习和计算模拟的蛋白质变构调节剂的识别方法,中国发明专利,专利号:ZL202211500668.3.</span>
+              <span class="pub-text"><b data-en="Fourth inventor" data-zh="第四发明人">Fourth inventor</b> — <span data-en="Identification method of protein allosteric modulators based on deep learning and computational simulation. Chinese invention patent, No.: ZL202211500668.3." data-zh="基于深度学习和计算模拟的蛋白质变构调节剂的识别方法，中国发明专利，专利号：ZL202211500668.3。">基于深度学习和计算模拟的蛋白质变构调节剂的识别方法,中国发明专利,专利号:ZL202211500668.3.</span></span>
             </li>
             <li class="pub-item under-review">
               <span class="pub-num">[18]</span>
-              <span class="pub-text"><b>First Author</b> <em style="color:#e65100;">[Under Review]</em> — A Computational Platform for Hapten-Specific Nanobody Engineering: Integrating Pocket Database, Screening and Analysis.</span>
+              <span class="pub-text"><b data-en="First Author" data-zh="第一作者">First Author</b> <em style="color:#e65100;" data-en="[Under Review]" data-zh="[审稿中]">[Under Review]</em> — NBsPocket: A Computational Platform Integrating an Engineered Pocket Database for Hapten-Specific Nanobody Rational Screening and Analysis.</span></span>
             </li>
             <li class="pub-item under-review">
               <span class="pub-num">[19]</span>
-              <span class="pub-text"><b>Co-first Author</b> <em style="color:#e65100;">[Under Review]</em> — Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.</span>
+              <span class="pub-text"><b data-en="Co-first Author" data-zh="共同第一作者">Co-first Author</b> <em style="color:#e65100;" data-en="[Under Review]" data-zh="[审稿中]">[Under Review]</em> — Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.</span></span>
             </li>
 
           </ul>
 
           <!-- ===== Links ===== -->
-          <h1 id="link">3. Links</h1>
+          <h1 id="link" data-en="3. Links" data-zh="3. 相关链接">3. Links</h1>
           <div>
             <a class="link-card" href="http://1.15.44.91:800/" target="_blank">
-              &#x1F4E6; Antibody Drug Development Resource Navigator (AntibodyHub Pro)
+              <span data-en="&#x1F4E6; Antibody Drug Development Resource Navigator (AntibodyHub Pro)"
+                    data-zh="&#x1F4E6; 抗体药物开发资源导航平台（AntibodyHub Pro）">&#x1F4E6; Antibody Drug Development Resource Navigator (AntibodyHub Pro)</span>
             </a>
           </div>
 
           <!-- 联系与社交 -->
-          <h1 id="contact">Contact us</h1>
+          <h1 id="contact" data-en="Contact us" data-zh="联系我们">Contact us</h1>
           <div class="contact-block">
             <div style="margin-bottom:6px;">
               <strong>Jourmore</strong> &nbsp;|&nbsp; <a href="mailto:maojun@stu.scu.edu.cn">maojun@stu.scu.edu.cn</a>
@@ -664,7 +706,9 @@
           </div>
 
           <br/>
-          <a class="go-top" href="#page-wrapper">&#x2191; Go to Top</a>
+          <a class="go-top" href="#page-wrapper"
+             data-en="&#x2191; Go to Top"
+             data-zh="&#x2191; 回到顶部">&#x2191; Go to Top</a>
 
         </td>
       </tr>
@@ -675,13 +719,65 @@
     <div id="colophon">
       <div id="theme-credits">
         <p id="footer-copyright">
-          <span class="footer-notice">JourLab &copy; 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>.</span>
+          <span class="footer-notice"
+                data-en="JourLab &copy; 2026. All rights reserved by Jourmore."
+                data-zh="JourLab &copy; 2026. 版权所有 &mdash; <a href='https://jourmore.github.io/' target='_blank'>Jourmore</a>。">JourLab &copy; 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>.</span>
         </p>
       </div>
     </div>
   </div>
 
   <script src='/jscss/bootstrap.bundle.min.js'></script>
+
+  <!-- ===== 中英文切换逻辑 ===== -->
+  <script>
+    // 读取上次保存的语言（默认英文）
+    var currentLang = localStorage.getItem('jourlabLang') || 'en';
+
+    // 应用语言到所有带 data-en / data-zh 属性的元素
+    function applyLang(lang) {
+      var els = document.querySelectorAll('[data-en],[data-zh]');
+      els.forEach(function(el) {
+        var txt = el.getAttribute('data-' + lang);
+        if (txt !== null) {
+          // 对于包含 HTML 实体 / 标签的内容使用 innerHTML
+          el.innerHTML = txt;
+        }
+      });
+
+      // Welcome 标题特殊处理：保持 <b>JourLab</b> 不变
+      var wtitle = document.querySelector('.welcome-title');
+      if (wtitle) {
+        if (lang === 'zh') {
+          wtitle.innerHTML = '欢迎来到 <b>JourLab</b>';
+        } else {
+          wtitle.innerHTML = 'Welcome to <b>JourLab</b>';
+        }
+      }
+
+      // 更新切换按钮文字
+      var btn = document.getElementById('lang-toggle');
+      if (btn) {
+        btn.innerHTML = lang === 'en' ? '🌐 中文' : '🌐 English';
+      }
+
+      // 更新页面 lang 属性
+      document.documentElement.setAttribute('xml:lang', lang === 'zh' ? 'zh' : 'en');
+    }
+
+    // 切换语言
+    function toggleLang(e) {
+      e.preventDefault();
+      currentLang = (currentLang === 'en') ? 'zh' : 'en';
+      localStorage.setItem('jourlabLang', currentLang);
+      applyLang(currentLang);
+    }
+
+    // 页面加载时应用已保存的语言
+    document.addEventListener('DOMContentLoaded', function() {
+      applyLang(currentLang);
+    });
+  </script>
 
 </body>
 
