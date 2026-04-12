@@ -1,10 +1,10 @@
-# Jour Lab
+# Jourmore | Jour Lab
 
 ![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
 
-<!-- [Jourmore Homepage](https://jourmore.github.io/) -->
+[Homepage](https://jourmore.github.io/)
 
-![Jour Lab](https://github.com/jourmore/jourmore.github.io/blob/main/images/banner.png)
+![Jourmore | Jour Lab](https://github.com/jourmore/jourmore.github.io/blob/main/images/banner.png)
 
 ### * Bioinformatics and Cheminformatics
 * Machine learning (ML) & Deep learning (DL)
