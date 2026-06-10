@@ -7,10 +7,10 @@
 ![Jourmore | Academic Website](https://github.com/jourmore/jourmore.github.io/blob/main/images/banner.png)
 
 ### * Research
-1) Small Molecule & Protein & Nanobody
-2) Food Dark Matter & Toxicity Prediction & Toxic Mechanism
+1) Small Molecule & Protein & Nanobody (CADD & AIDD)
+2) Food Dark Matter & Toxicity Prediction & Toxic Mechanism (Computational Toxicology)
 
 ### * Bioinformatics and Cheminformatics
-* Machine learning (ML) & Deep learning (DL)
+* Machine learning & Deep learning (AI/ML/DL)
 * Molecular dynamics simulations (MD)
 * Database & Web server (APP)
