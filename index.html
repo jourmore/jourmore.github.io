@@ -1,620 +1,865 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title id="pageTitle">Jourmore | 计算生物学与化学信息学</title>
+  <title id="pageTitle">Jourmore</title>
   <link rel="icon" href="/jscss/favicon.ico" type="image/x-icon">
   
   <!-- 样式表 -->
   <link rel="stylesheet" href="/jscss/jemdoc.css" type="text/css">
   <link rel="stylesheet" href="/jscss/bootstrap.min.css">
-  <link rel="stylesheet" href="/jscss/bootstrap2.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  
-  <!-- 脚本 -->
-  <script src="/jscss/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="/jscss/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="/jscss/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/jscss/bootstrap2.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* ========== 全局重置与基础 - 优化字体与色彩 ========== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body {
-      margin: 0; padding: 0;
-      background: #f0f4fa;  /* 更明亮的底色 */
-      font-family: "Segoe UI", "Helvetica Neue", Roboto, "Times New Roman", serif;
-      color: #1f2d3d;
-      font-size: 16px;      /* 基础字体加大 */
-      line-height: 1.6;
-      scroll-behavior: smooth;
+    /* 全局与布局 */
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #eef4fb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      line-height: 1.65;
     }
-    /* ========== 顶部导航栏 ========== */
-    #top-navbar {
+    #page-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 40px rgba(33, 150, 243, 0.1);
+      min-height: 100vh;
+    }
+    
+    /* 顶部导航 - 深蓝色系，更有质感 */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 32px;
+      height: 54px;
+      background: linear-gradient(90deg, #0d47a1 0%, #1976d2 60%, #42a5f5 100%);
+      color: white;
       position: sticky;
       top: 0;
-      z-index: 999;
-      background: linear-gradient(135deg, #0f3b6f 0%, #1f6392 80%, #3f8ec7 100%);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      height: 64px;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(13, 71, 161, 0.3);
     }
-    #top-navbar .nav-brand {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 1px;
-      text-decoration: none;
-    }
-    #top-navbar .nav-brand span { color: #ffdd88; }
-    #top-navbar .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    #top-navbar .nav-links a {
-      color: rgba(255,255,255,0.92);
-      text-decoration: none;
-      margin-left: 24px;
-      font-size: 1.05rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    #top-navbar .nav-links a:hover { color: #ffdd88; border-bottom: none; }
-    /* 语言切换按钮 */
-    .lang-switch {
-      background: rgba(255,255,255,0.2);
-      padding: 6px 16px;
-      border-radius: 40px;
-      margin-left: 24px !important;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-size: 0.95rem;
-      transition: background 0.2s, color 0.2s;
-      color: white;
-    }
-    .lang-switch:hover { background: rgba(255,255,255,0.35); color: #ffdd88 !important; }
-    /* ========== 页面布局容器 - 扩大占比 ========== */
-    #page-wrapper {
-      max-width: 1500px;    /* 增大宽度 */
-      margin: 0 auto;
-      padding: 32px 28px 0;
-    }
-    /* 双栏 flex 布局 */
-    #tlayout {
-      display: flex !important;
-      width: 100%;
-      gap: 32px;
-    }
-    /* 左侧菜单栏 24% (稍增) */
-    #layout-menu {
-      width: 24% !important;
-      flex-shrink: 0;
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 28px 22px 36px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.06);
-      position: sticky;
-      top: 88px;
-      height: fit-content;
-      border: 1px solid #e2edf7;
-    }
-    /* 右侧主内容 76% */
-    #layout-content {
-      flex: 1;
-      width: 76% !important;
-      background: #ffffff;
-      border-radius: 32px;
-      padding: 36px 40px 44px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-    }
-    /* 左侧菜单样式 */
-    .menu-category {
-      border-bottom: 2px solid #dce7f2;
-      margin-top: 0;
-      padding-bottom: 12px;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #135b8d;
-    }
-    .menu-item {
-      margin: 14px 0;
-      font-size: 1.08rem;
-    }
-    .menu-item a {
-      color: #2c628b;
-      text-decoration: none;
-      display: block;
-      padding: 8px 14px;
-      border-radius: 16px;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
-    .menu-item a:hover {
-      background: #e6f0fa;
-      color: #0f4c75;
-      border-bottom: none;
-      transform: translateX(4px);
-    }
-    /* news 卡片更清新 */
-    .news-block {
-      margin-top: 32px;
-      background: #fff9ef;
-      border-left: 6px solid #f3a712;
-      border-radius: 20px;
-      padding: 18px 16px 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-    }
-    .news-block .news-title {
-      font-size: 1.35rem;
+    .topbar .brand {
+      font-size: 1.4rem;
       font-weight: 800;
-      color: #c25d00;
-      margin-bottom: 12px;
+      letter-spacing: 2px;
     }
-    .news-block .news-item {
-      font-size: 1rem;
-      color: #5a3e1b;
-      line-height: 1.5;
+    .topbar .brand a {
+      color: white;
+      text-decoration: none;
     }
-    /* banner 圆角增强 */
-    .banner-wrapper {
-      border-radius: 24px;
-      overflow: hidden;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    .topbar .brand a:last-child { color: #ffd54f; }
+    .topbar nav a {
+      color: rgba(255,255,255,0.92);
+      margin-left: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.25s;
+      padding: 5px 12px;
+      border-radius: 6px;
     }
-    .banner-wrapper img {
-      width: 100%;
+    .topbar nav a:hover {
+      background: rgba(255,255,255,0.18);
+      color: #ffd54f;
+    }
+    .lang-switch {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      margin-left: 12px;
+      transition: background 0.2s;
+    }
+    .lang-switch:hover { background: rgba(255,255,255,0.3); }
+    
+    /* 移动端菜单 */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .mobile-menu {
+      display: none;
+      background: #64b5f6;
+      padding: 10px 0;
+    }
+    .mobile-menu a {
       display: block;
+      padding: 10px 32px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
     }
-    /* welcome + 轮播行 */
+    
+    /* 主要内容区域 - 左右布局，1:4 固定比例 */
+    .main-content-wrapper {
+      display: flex;
+      gap: 20px;
+      padding: 24px 28px;
+      align-items: flex-start;
+    }
+
+    /* 左侧 News 侧栏 — 固定 20% */
+    .news-sidebar {
+      flex: 0 0 20%;
+      width: 20%;
+      min-width: 180px;
+      max-width: 260px;
+      background: linear-gradient(160deg, #e3f2fd 0%, #dbeeff 100%);
+      border-radius: 14px;
+      padding: 20px 16px;
+      box-shadow: 0 4px 16px rgba(33, 150, 243, 0.13);
+      border: 1.5px solid #90caf9;
+      height: fit-content;
+      position: sticky;
+      top: 72px;
+    }
+    .news-box {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    .news-box h3 {
+      margin-top: 0;
+      color: #1565c0;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #90caf9;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .news-item {
+      background: white;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.09);
+      border-left: 4px solid #42a5f5;
+      transition: box-shadow 0.2s;
+    }
+    .news-item:hover {
+      box-shadow: 0 4px 14px rgba(33, 150, 243, 0.18);
+    }
+    .news-item:last-child { margin-bottom: 0; }
+    .news-date {
+      color: #1565c0;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+    }
+    .news-content {
+      color: #424242;
+      line-height: 1.55;
+      font-size: 0.88rem;
+    }
+
+    /* 右侧内容区域 — 占剩余 80% */
+    .right-content {
+      flex: 1;
+      min-width: 0;
+      width: 80%;
+    }
+    
+    /* 欢迎区域 */
     .welcome-carousel-row {
       display: flex;
-      align-items: stretch;
-      gap: 28px;
-      margin-bottom: 36px;
-      flex-wrap: wrap;
+      align-items: stretch;   /* 两侧等高 */
+      gap: 24px;
+      margin-bottom: 32px;
     }
+    /* 左侧文字：占约 3/5 */
     .welcome-section {
-      flex: 2;
-      background: linear-gradient(110deg, #eef5ff 0%, #ffffff 100%);
-      border-radius: 28px;
-      padding: 26px 32px;
-      border-left: 6px solid #1e88e5;
+      flex: 3;
+      min-width: 0;
+      padding: 16px 8px 16px 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .welcome-title {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #0b3b5f;
-      margin-bottom: 14px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0d47a1;
+      margin-bottom: 8px;
+      line-height: 1.25;
     }
-    .welcome-title b { color: #1068bf; }
+    .welcome-sub {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #1976d2;
+      margin-bottom: 14px;
+      opacity: 0.88;
+    }
     .welcome-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 20px;
+      gap: 8px;
+      margin-top: 10px;
     }
     .tag {
-      background: #dfecfb;
-      color: #1068bf;
-      border-radius: 48px;
-      padding: 6px 20px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: 1px solid #c2dcff;
+      background: linear-gradient(135deg, #e8f4ff, #d0e8ff);
+      color: #1a4f8a;
+      padding: 5px 13px;
+      border-radius: 16px;
+      font-size: 0.87rem;
+      font-weight: 500;
+      border: 1px solid #a8ccf0;
+      transition: background 0.2s;
     }
-    /* 右侧轮播 */
+    .tag:hover { background: linear-gradient(135deg, #d0e8ff, #b8d8ff); }
+
+    /* 欢迎区轮播容器 — flex:2 占右侧约 40% 宽度 */
     #carouselExampleInterval {
-      flex-shrink: 0;
-      width: 260px;
-      border-radius: 24px;
+      flex: 2;
+      min-width: 220px;
+      max-width: 460px;
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-      border: 2px solid white;
-      background: #eef2fa;
+      box-shadow: 0 8px 24px rgba(13, 71, 161, 0.16);
+      border: 2px solid #c5dff8;
+      background: #e8f4ff;
     }
-    /* 标题更鲜明 */
-    h1 {
-      font-size: 1.9rem !important;
-      color: #bb2649 !important;
-      font-weight: 700;
-      border-left: 6px solid #bb2649;
-      padding-left: 20px;
-      margin: 42px 0 24px 0 !important;
+    /* carousel-inner 明确高度，让 Bootstrap 的 JS 正常运作 */
+    #carouselExampleInterval .carousel-inner {
+      height: 220px;
     }
-    h2 {
-      font-size: 1.4rem !important;
-      font-weight: 700;
-      color: #1f6392;
-      margin: 0 0 12px 0;
+    /* 每个图片充满 inner 高度 */
+    #carouselExampleInterval .carousel-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #e8f4ff;
+      display: block;
     }
-    /* research 卡片增强 */
-    .research-card {
+    /* 左右控制箭头 */
+    #carouselExampleInterval .carousel-control-prev-icon,
+    #carouselExampleInterval .carousel-control-next-icon {
+      filter: invert(20%) sepia(80%) saturate(600%) hue-rotate(195deg);
+    }
+    #carouselExampleInterval .carousel-control-prev,
+    #carouselExampleInterval .carousel-control-next {
+      width: 14%;
+      background: rgba(13, 71, 161, 0.15);
+      transition: background 0.2s;
+    }
+    #carouselExampleInterval .carousel-control-prev:hover,
+    #carouselExampleInterval .carousel-control-next:hover {
+      background: rgba(13, 71, 161, 0.38);
+    }
+    /* 底部指示点 */
+    #carouselExampleInterval .carousel-indicators li {
+      background-color: rgba(13, 71, 161, 0.4);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border-top: none;
+      border-bottom: none;
+      margin: 0 3px;
+    }
+    #carouselExampleInterval .carousel-indicators .active {
+      background-color: #1976d2;
+    }
+
+    /* 内容区块 */
+    .section {
+      padding: 18px 0;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      color: #1565c0;
+      border-bottom: 2px solid #bbdefb;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
       display: flex;
-      gap: 28px;
-      background: #fafcff;
-      border-radius: 28px;
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      border: 1px solid #e6edf6;
-      transition: all 0.25s;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
     }
-    .research-card:hover { box-shadow: 0 12px 22px rgba(0,0,0,0.06); transform: translateY(-2px); }
-    .research-card img {
-      width: 160px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 1px solid #d4e2f5;
+    
+    /* 研究方向卡片 */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
     }
-    .research-card-body ul {
-      padding-left: 22px;
-      margin: 10px 0 0 0;
+    .research-card {
+      background: linear-gradient(145deg, #f8fbff 0%, #e8f4ff 100%);
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 3px 12px rgba(66, 165, 245, 0.10);
+      border-top: 4px solid #42a5f5;
+      border-left: 1px solid #ddeeff;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .research-card-body li {
-      margin-bottom: 8px;
-      font-size: 1rem;
+    .research-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px rgba(66, 165, 245, 0.22);
     }
-    /* 论文列表 - 字体增大 */
+    .research-card h4 {
+      color: #1565c0;
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .research-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    .research-card li {
+      margin-bottom: 6px;
+      color: #4a4a4a;
+      font-size: 0.93rem;
+    }
+    
+    /* 论文列表 */
     .pub-list {
       list-style: none;
       padding: 0;
-      margin: 0;
     }
     .pub-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
-      background: #fefefe;
-      border-left: 5px solid #a8c9f0;
-      border-radius: 20px;
-      transition: background 0.2s;
-      font-size: 0.96rem;
-      line-height: 1.55;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      background: #f7fbff;
+      border-left: 3px solid #64b5f6;
+      padding: 12px 16px;          /* 四边统一内边距，移除右侧 68px 预留 */
+      margin-bottom: 10px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 5px rgba(66, 165, 245, 0.07);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      transition: background 0.18s, border-color 0.18s;
     }
-    .pub-item:hover { background: #f5faff; border-left-color: #1e88e5; }
-    .pub-item.under-review { border-left-color: #ffb74d; background: #fffaf0; }
-    .pub-num {
-      min-width: 48px;
-      font-weight: 700;
-      color: #1e466e;
-      font-size: 0.9rem;
+    .pub-item:hover {
+      background: #edf5ff;
+      border-left-color: #1976d2;
     }
-    .pub-text {
-      flex: 1;
-    }
-    .pub-title {
-      font-weight: 600;
-      color: #1e2f44;
-    }
-    .journal {
-      color: #1976d2;
-      font-weight: 600;
-      font-style: italic;
-      margin: 0 4px;
-    }
-    .pub-link {
-      display: inline-block;
-      margin-left: 12px;
-      background: #1e88e5;
-      color: #fff !important;
-      border-radius: 30px;
-      padding: 3px 14px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-decoration: none;
-    }
-    .pub-link:hover { background: #0f5d9e; border-bottom: none; }
-    .badge-first, .badge-co, .badge-corr {
-      display: inline-block;
-      background: #d32f2f;
-      color: white;
-      font-size: 0.72rem;
-      font-weight: 600;
-      border-radius: 24px;
-      padding: 3px 12px;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-    .badge-co { background: #f57c00; }
-    .badge-corr { background: #2c6e2c; }
-    /* 工具链接 */
-    .tools-grid {
+    /* 标签行：流式显示，在正文上方 */
+    .pub-tags-row {
       display: flex;
       flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 6px;          /* 标签行与正文间距 */
+    }
+    .pub-item .pub-tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: white;
+      white-space: nowrap;
+      line-height: 1.6;
+      /* 不再 position:absolute */
+    }
+    .pub-item .pub-tag.first        { background: #1e88e5; }
+    .pub-item .pub-tag.co-first     { background: #26a69a; }
+    .pub-item .pub-tag.corresponding{ background: #7b1fa2; }
+    .pub-item .pub-tag.reviewing    { background: #78909c; }
+    .pub-item strong { color: #0d47a1; }
+    .pub-item em { color: #0277bd; font-style: italic; font-weight: 500; }
+    .pub-item a { color: #1976d2; text-decoration: none; font-weight: 600; margin-left: 4px; }
+    .pub-item a:hover { text-decoration: underline; color: #0d47a1; }
+    
+    /* 工具平台 */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 18px;
-      margin: 28px 0 20px;
     }
-    .tool-btn {
-      background: #eef3fc;
-      padding: 10px 26px;
-      border-radius: 48px;
-      font-weight: 600;
-      font-size: 0.98rem;
-      color: #1068bf;
+    .tool-card {
+      background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+      color: white;
+      padding: 22px 18px;
+      border-radius: 14px;
+      text-align: center;
       text-decoration: none;
-      border: 1px solid #cddef5;
-      transition: 0.2s;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 16px rgba(21, 101, 192, 0.28);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
     }
-    .tool-btn:hover { background: #e0ebf9; transform: translateY(-2px); border-bottom: none; }
-    /* about 履历 */
-    .about-timeline {
-      background: #f8fbfe;
-      border-radius: 28px;
-      padding: 16px 28px 24px;
-      margin: 20px 0;
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(21, 101, 192, 0.42);
+      color: white;
+      text-decoration: none;
+    }
+    .tool-card i {
+      font-size: 2.2rem;
+      opacity: 0.92;
+    }
+    .tool-card h5 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    
+    /* 关于我时间线 */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      border-left: 2px solid #90caf9;
+      margin-bottom: 24px;
     }
     .timeline-item {
-      display: flex;
-      gap: 24px;
-      margin: 16px 0;
-      flex-wrap: wrap;
-      border-bottom: 1px dashed #dce5ef;
-      padding-bottom: 12px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #1976d2;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px #42a5f5;
+    }
+    .timeline-item .year {
+      font-weight: 700;
+      color: #0d47a1;
       font-size: 1rem;
     }
-    .timeline-year {
+    .timeline-item .desc {
+      color: #555;
+      margin-top: 3px;
+      font-size: 0.93rem;
+    }
+    
+    /* 联系方式 */
+    .contact-card {
+      background: linear-gradient(135deg, #e8f4ff 0%, #d5eaff 100%);
+      padding: 20px 22px;
+      border-radius: 12px;
+      margin-top: 16px;
+      text-align: center;
+      border: 1.5px solid #90caf9;
+      box-shadow: 0 2px 10px rgba(33, 150, 243, 0.1);
+    }
+    .contact-card h4 {
+      margin-top: 0;
+      color: #0d47a1;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: #1e88e5;
-      min-width: 110px;
     }
-    /* contact & social */
-    .contact-block {
-      background: #eef3fc;
-      border-radius: 28px;
-      padding: 24px 28px;
-      margin-top: 24px;
-    }
+    .contact-card p { margin: 4px 0; font-size: 0.93rem; }
+    .contact-card a { color: #1565c0; font-weight: 500; }
     .social-badges {
       display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 16px;
     }
     .social-badge {
-      padding: 8px 22px;
-      border-radius: 48px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
+      padding: 6px 16px;
+      border-radius: 20px;
       color: white;
-      transition: 0.2s;
+      text-decoration: none;
+      font-size: 0.87rem;
+      font-weight: 600;
+      transition: opacity 0.25s, transform 0.2s;
+      letter-spacing: 0.3px;
     }
-    .badge-orcid { background: #3a8c3a; }
-    .badge-rg { background: #009688; }
-    .badge-gh { background: #24292f; }
-    .social-badge:hover { opacity: 0.85; transform: translateY(-2px); }
+    .social-badge:hover { opacity: 0.85; transform: translateY(-2px); text-decoration: none; }
+    .badge-email { background: #1e88e5; }
+    .badge-orcid { background: #7cb342; }
+    .badge-rg { background: #00acc1; }
+    .badge-gh { background: #37474f; }
+    
+    /* 返回顶部 */
     .go-top {
       display: inline-block;
-      margin-top: 36px;
-      background: #eef2fa;
-      padding: 8px 26px;
-      border-radius: 40px;
-      color: #1e88e5;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .go-top:hover { background: #e0e9f5; transform: translateY(-2px); }
-    #footer {
-      max-width: 1400px;
-      margin: 48px auto 28px;
       text-align: center;
-      font-size: 0.85rem;
-      color: #5f6c84;
-      border-top: 1px solid #dce5ef;
-      padding-top: 24px;
+      padding: 9px 28px;
+      background: linear-gradient(90deg, #0d47a1, #42a5f5);
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      margin: 20px 0;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(13, 71, 161, 0.25);
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    @media (max-width: 900px) {
-      #tlayout { flex-direction: column; }
-      #layout-menu { width: 100% !important; position: static; }
-      #layout-content { width: 100% !important; padding: 28px; }
+    .go-top:hover {
+      background: linear-gradient(90deg, #1565c0, #1e88e5);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 16px rgba(13, 71, 161, 0.35);
+      text-decoration: none;
+    }
+    
+    /* 页脚 */
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: linear-gradient(90deg, #0d47a1 0%, #1976d2 60%, #42a5f5 100%);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.88rem;
+      letter-spacing: 0.3px;
+    }
+    footer a { color: #ffd54f; text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .main-content-wrapper {
+        flex-direction: column;
+        padding: 16px 18px;
+      }
+      .news-sidebar {
+        flex: none;
+        width: 100% !important;
+        max-width: 100%;
+        min-width: unset;
+        position: static;
+      }
+      .right-content { width: 100% !important; }
+    }
+    @media (max-width: 768px) {
+      .topbar nav { display: none; }
+      .mobile-menu-btn { display: block; }
       .welcome-carousel-row { flex-direction: column; }
-      #carouselExampleInterval { width: 100%; height: 220px; }
-      .research-card { flex-direction: column; }
-      .research-card img { width: 100%; height: auto; max-height: 150px; }
+      #carouselExampleInterval {
+        flex: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      #carouselExampleInterval .carousel-inner,
+      #carouselExampleInterval .carousel-item img {
+        height: 200px;
+      }
+      .section { padding: 15px 0; }
+      .main-content-wrapper { padding: 12px 12px; }
+    }
+    @media print {
+      .topbar { display: none; }
+      .news-sidebar { display: none; }
     }
   </style>
 </head>
 <body>
-
-<div id="top-navbar">
-  <a class="nav-brand" href="#">Jour<span>More</span></a>
-  <div class="nav-links">
-    <a href="#research" data-nav-en="Research" data-nav-zh="研究" class="nav-link-i18n">研究</a>
-    <a href="#publication" data-nav-en="Publications" data-nav-zh="论文" class="nav-link-i18n">论文</a>
-    <a href="#tools" data-nav-en="Tools" data-nav-zh="工具" class="nav-link-i18n">资源</a>
-    <a href="#about" data-nav-en="About" data-nav-zh="关于" class="nav-link-i18n">关于</a>
-    <button id="langToggle" class="lang-switch">English</button>
-  </div>
-</div>
-
-<div id="page-wrapper">
-  <div id="tlayout">
-      <!-- 左侧菜单栏 -->
-      <div id="layout-menu">
-        <div class="menu-category" data-i18n="menu-category">Menu</div>
-        <div class="menu-item"><a href="#research" data-i18n="menu-research">🔬 研究方向</a></div>
-        <div class="menu-item"><a href="#publication" data-i18n="menu-pub">📄 发表论文</a></div>
-        <div class="menu-item"><a href="#tools" data-i18n="menu-tools">🧰 相关资源</a></div>
-        <div class="menu-item"><a href="#about" data-i18n="menu-about">🎓 关于我</a></div>
-        <div class="news-block">
-          <div class="news-title" data-i18n="news-title">📢 News</div>
-          <div class="news-item" id="newsContent" data-i18n-multi="news-content">
-            <strong>2026.06</strong><br>
-            博士毕业并入职西华大学任教，<br>
-            继续深耕计算驱动药物发现与计算毒理学相关研究。
-          </div>
-        </div>
+  <div id="page-wrapper">
+    <!-- 顶部导航 -->
+    <div class="topbar">
+      <div class="brand">
+        <a href="#page-wrapper">Jour</a><a href="#page-wrapper" style="color:#ffd54f;">More</a>
       </div>
+      <nav>
+        <a href="#research" data-i18n="nav-research">研究</a>
+        <a href="#publication" data-i18n="nav-publication">论文</a>
+        <a href="#tools" data-i18n="nav-tools">资源</a>
+        <a href="#about" data-i18n="nav-about">关于</a>
+        <button class="lang-switch" onclick="toggleLanguage()">English</button>
+      </nav>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#research" data-i18n="nav-research">🔬 研究方向</a>
+      <a href="#publication" data-i18n="nav-publication">📄 发表论文</a>
+      <a href="#tools" data-i18n="nav-tools">🧰 相关资源</a>
+      <a href="#about" data-i18n="nav-about">🎓 关于我</a>
+    </div>
 
-      <!-- 右侧主要内容区 -->
-      <div id="layout-content">
-        <div class="banner-wrapper">
-          <img src="images/banner.png" alt="Jourmore Lab Banner">
-        </div>
-
-        <div class="welcome-carousel-row">
-          <div class="welcome-section">
-            <div class="welcome-title" data-i18n="welcome-title">Welcome to <b>Jourmore Academic Website</b></div>
-            <div style="font-size: 1.5rem; font-weight: 600; color:#bb2649;" data-i18n="welcome-sub">Bioinformatics & Cheminformatics</div>
-            <div class="welcome-tags">
-              <span class="tag" data-i18n="tag1">🤖 Machine / Deep Learning (AI/ML/DL)</span>
-              <span class="tag" data-i18n="tag2">⚛️ Molecular Dynamics (MD)</span>
-              <span class="tag" data-i18n="tag3">🌐 Database & Web Server (Tool)</span>
+    <!-- 主要内容区域 - 左右布局 -->
+    <div class="main-content-wrapper">
+      <!-- 左侧News -->
+      <aside class="news-sidebar">
+        <div class="news-box">
+          <h3>📢 <span data-i18n="news-title">News</span></h3>
+          <div class="news-item">
+            <div class="news-date"><strong>2026.06</strong></div>
+            <div class="news-content" data-i18n="news-content">
+              博士毕业并入职西华大学任教，继续深耕计算驱动药物发现与计算毒理学相关研究。
             </div>
           </div>
-          <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active" data-interval="2500"><img src="images/profile1.png" alt="TOC"></div>
-              <div class="carousel-item" data-interval="2500"><img src="images/profile2.png" alt="MD"></div>
-              <div class="carousel-item" data-interval="2500"><img src="images/profile3.png" alt="ML"></div>
-              <div class="carousel-item" data-interval="2500"><img src="images/profile4.png" alt="Web"></div>
+        </div>
+      </aside>
+
+      <!-- 右侧内容 -->
+      <div class="right-content">
+        <!-- 欢迎区域 -->
+        <div class="section">
+          <div class="welcome-carousel-row">
+            <div class="welcome-section">
+              <div class="welcome-title" data-i18n="welcome-title" data-i18n-multi>Welcome to <b>Jourmore Academic Website</b></div>
+              <div style="font-size: 1.5rem; font-weight: 600; color:#42a5f5;" data-i18n="welcome-sub">Bioinformatics & Cheminformatics</div>
+              <div class="welcome-tags">
+                <span class="tag" data-i18n="tag1">🤖 Machine / Deep Learning (AI/ML/DL)</span>
+                <span class="tag" data-i18n="tag2">⚛️ Molecular Dynamics (MD)</span>
+                <span class="tag" data-i18n="tag3">🌐 Database & Web Server (Tool)</span>
+              </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>
-            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"><span class="carousel-control-next-icon"></span></a>
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel" data-interval="2500">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleInterval" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleInterval" data-slide-to="1"></li>
+                <li data-target="#carouselExampleInterval" data-slide-to="2"></li>
+                <li data-target="#carouselExampleInterval" data-slide-to="3"></li>
+                <li data-target="#carouselExampleInterval" data-slide-to="4"></li>
+                <li data-target="#carouselExampleInterval" data-slide-to="5"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="2500"><img src="images/profile1.png" alt="TOC"></div>
+                <div class="carousel-item" data-interval="2500"><img src="images/profile2.png" alt="MD"></div>
+                <div class="carousel-item" data-interval="2500"><img src="images/profile3.png" alt="ML"></div>
+                <div class="carousel-item" data-interval="2500"><img src="images/profile4.png" alt="Web"></div>
+                <div class="carousel-item" data-interval="2500"><img src="images/2previous.jpg" alt="CADD & Nanobody"></div>
+                <div class="carousel-item" data-interval="2500"><img src="images/3more.jpg" alt="Food Dark Matter & Toxicity"></div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- 研究方向 -->
-        <h1 id="research" data-i18n="research-head">Research 研究方向</h1>
-        <div class="research-card">
-          <img src="images/2previous.jpg" alt="CADD & Nanobody">
-          <div class="research-card-body">
-            <h2 data-i18n="research-card1-title">🧬 小分子 & 蛋白 & 纳米抗体</h2>
-            <ul>
-              <li data-i18n="research-card1-li1">计算机辅助药物筛选与设计 (CADD/AIDD)</li>
-              <li data-i18n="research-card1-li2">计算毒理学 / 网络毒理学 / 网络药理学 (Network)</li>
-            </ul>
-          </div>
-        </div>
-        <div class="research-card">
-          <img src="images/3more.jpg" alt="Food Dark Matter & Toxicity">
-          <div class="research-card-body">
-            <h2 data-i18n="research-card2-title">🍎 食品暗物质与毒性预测 (计算毒理学)</h2>
-            <ul>
-              <li data-i18n="research-card2-li1">食品中未知化合物 (暗物质) 空间分析与危害识别</li>
-              <li data-i18n="research-card2-li2">有毒化合物预测及毒性机制解析 (机器学习 + MD)</li>
-            </ul>
+        <div class="section" id="research">
+          <h2 class="section-title">🔬 <span data-i18n="research-title">Research 研究方向</span></h2>
+          <div class="research-grid">
+            <div class="research-card">
+              <h4 data-i18n="research1-title">🧬 小分子 & 蛋白 & 纳米抗体</h4>
+              <ul>
+                <li data-i18n="research1-item1">计算机辅助药物筛选与设计 (CADD/AIDD)</li>
+                <li data-i18n="research1-item2">计算毒理学 / 网络毒理学 / 网络药理学 (Network)</li>
+              </ul>
+            </div>
+            <div class="research-card">
+              <h4 data-i18n="research2-title">🍎 食品暗物质与毒性预测 (计算毒理学)</h4>
+              <ul>
+                <li data-i18n="research2-item1">食品中未知化合物 (暗物质) 空间分析与危害识别</li>
+                <li data-i18n="research2-item2">有毒化合物预测及毒性机制解析 (机器学习 + MD)</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <!-- 出版物列表：完整作者（参照 index0.html 去除 et al.） -->
-        <h1 id="publication" data-i18n="pub-head">📑 Publications 代表性论文</h1>
-        <ul class="pub-list">
-          <li class="pub-item"><span class="pub-num">[1]</span><span class="pub-text"><span class="badge-first" data-badge-key="first-author">第一作者</span><b>Mao J</b>, Song Y, Kong M, Guo Y, Liu Y, Pu X. <span class="pub-title">Thermostability Prediction Powered by Synergistic Deep Learning at Experimental and Theoretical Levels for Nanobodies.</span> <span class="journal">ACS Applied Materials & Interfaces</span>. 2026. <a class="pub-link" href="https://doi.org/10.1021/acsami.5c19073" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[2]</span><span class="pub-text"><span class="badge-first" data-badge-key="first-author">第一作者</span><b>Mao J</b>, Luo QQ, Zhang HR, Zheng XH, Shen C, Qi HZ, Hu ML, Zhang H. <span class="pub-title">Discovery of microtubule stabilizers with novel scaffold structures based on virtual screening, biological evaluation, and molecular dynamics simulation.</span> <span class="journal">Chemico-Biological Interactions</span>. 2022,352:109784. <a class="pub-link" href="https://doi.org/10.1016/j.cbi.2021.109784" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[3]</span><span class="pub-text"><span class="badge-corr" data-badge-key="corr-author">通讯作者</span>Pan CC, Yang CM, <b>Mao J</b>*. <span class="pub-title">Sense-of-agency as clinically accessible features for schizophrenia prediction: Interpretable ensemble machine learning research and webserver development.</span> <span class="journal">Asian Journal of Psychiatry</span>. 2025,111:104674. <a class="pub-link" href="https://doi.org/10.1016/j.ajp.2025.104674" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[4]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Yang MH, <b>Mao J</b>#, Zhu JH, Zhang H, Ding L. <span class="pub-title">Wangzaozin A, a potent novel microtubule stabilizer, targets both the taxane and laulimalide sites on β-tubulin through molecular dynamics simulations.</span> <span class="journal">Life Sciences</span>. 2022:120583. <a class="pub-link" href="https://doi.org/10.1016/j.lfs.2022.120583" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[5]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Li YL, <b>Mao J</b>#, Tian XF, Song H, Ren JX. <span class="pub-title">Identification of Salvianolic acid A as a potent inhibitor of PDEs to enhance proliferation of human neural stem cells.</span> <span class="journal">Journal of Molecular Structure</span>. 2025,1324:140905. <a class="pub-link" href="https://doi.org/10.1016/j.molstruc.2024.140905" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[6]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Li YL, <b>Mao J</b>#, Cheng Z, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="pub-title">Identification of Salvianolic acid A as a potent inhibitor of PDEs to enhance proliferation of human neural stem cells.</span> <span class="journal">Molecular Diversity</span>. 2025. <a class="pub-link" href="https://doi.org/10.1007/s11030-025-11185-8" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[7]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Li YL, <b>Mao J</b>#, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <span class="pub-title">Discovery of anti-glioblastoma natural products based on andrographolide derivatives: efficiently identifying potential multi-target and multifunctional molecules through the integration of in silico methods and experimental verification.</span> <span class="journal">Molecular Diversity</span>. 2026. <a class="pub-link" href="https://doi.org/10.1007/s11030-026-11531-4" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[8]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Zhang H, <b>Mao J</b>#, Qi HZ, Ding L. <span class="pub-title">In silico prediction of drug-induced developmental toxicity by using machine learning approaches.</span> <span class="journal">Molecular Diversity</span>. 2020,24(4):1281-1290. <a class="pub-link" href="https://doi.org/10.1007/s11030-019-09991-y" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[9]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Zhang H, <b>Mao J</b>#, Qi HZ, Xie HZ, Shen C, Liu CT, Ding L. <span class="pub-title">Developing novel computational prediction models for assessing chemical-induced neurotoxicity using naïve Bayes classifier technique.</span> <span class="journal">Food and Chemical Toxicology</span>. 2020,143:111513. <a class="pub-link" href="https://doi.org/10.1016/j.fct.2020.111513" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[10]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span>Zhang H, <b>Mao J</b>#, Yang YL, Liu CT, Shen C, Zhang HR, Xie HZ, Ding L. <span class="pub-title">Discovery of novel tubulin inhibitors targeting taxanes site by virtual screening, molecular dynamic simulation, and biological evaluation.</span> <span class="journal">Journal of Cellular Biochemistry</span>. 2021,122(11):1609-1624. <a class="pub-link" href="https://doi.org/10.1002/jcb.30077" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[11]</span><span class="pub-text">Kong M, Chen X, <b>Mao J</b>, Yu J, Song YP, Guo YZ, Pu XM. <span class="pub-title">Machine Learning Navigated Allosteric Network to Unveil Biased Allosteric Modulation of GPCRs.</span> <span class="journal">Journal of Chemical Theory and Computation</span>. 2025,21(19):9669-9686. <a class="pub-link" href="https://doi.org/10.1021/acs.jctc.5c00935" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[12]</span><span class="pub-text">Hu J, Yang SR, <b>Mao J</b>, Shi CJ, Wang GC, Liu YJ, Pu XM. <span class="pub-title">Exploring a general convolutional neural network-based prediction model for critical casting diameter of metallic glasses.</span> <span class="journal">Journal of Alloys and Compounds</span>. 2023,947:169479. <a class="pub-link" href="https://doi.org/10.1016/j.jallcom.2023.169479" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[13]</span><span class="pub-text">Zhang H, Qi HZ, <b>Mao J</b>, Zhang HR, Luo QQ, Hu ML, Shen C, Ding L. <span class="pub-title">Discovery of novel microtubule stabilizers targeting taxane binding site by applying molecular docking, molecular dynamics simulation, and anticancer activity testing.</span> <span class="journal">Bioorganic Chemistry</span>. 2022,122:105722. <a class="pub-link" href="https://doi.org/10.1016/j.bioorg.2022.105722" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[14]</span><span class="pub-text">Zhang H, Liu CT, <b>Mao J</b>, Shen C, Xie RL, Mu B. <span class="pub-title">Development of novel in silico prediction model for drug-induced ototoxicity by using naïve Bayes classifier approach.</span> <span class="journal">Toxicology in Vitro</span>. 2020,65:104812. <a class="pub-link" href="https://doi.org/10.1016/j.tiv.2020.104812" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[15]</span><span class="pub-text">Zhang H, Shen C, Liu RZ, <b>Mao J</b>, Liu CT, Mu B. <span class="pub-title">Developing novel in silico prediction models for assessing chemical reproductive toxicity using the naïve Bayes classifier method.</span> <span class="journal">Journal of Applied Toxicology</span>. 2020,40(9):1198-1209. <a class="pub-link" href="https://doi.org/10.1002/jat.3975" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[16]</span><span class="pub-text">Chen X, Wang K, Chen J, Wu C, <b>Mao J</b>, Song Y, Liu Y, Shao Z, Pu X. <span class="pub-title">Integrative residue-intuitive machine learning and MD Approach to Unveil Allosteric Site and Mechanism for β2AR.</span> <span class="journal">Nature Communications</span>. 2024,15(1):8130. <a class="pub-link" href="https://doi.org/10.1038/s41467-024-52399-y" target="_blank">DOI</a></span></li>
-          <li class="pub-item"><span class="pub-num">[17]</span><span class="pub-text" data-i18n="patent-text"><b>专利</b> — 基于深度学习和计算模拟的蛋白质变构调节剂的识别方法, 中国发明专利 ZL202211500668.3 (授权日2023.9.8).</span></li>
-          <li class="pub-item under-review"><span class="pub-num">[18]</span><span class="pub-text"><span class="badge-first" data-badge-key="first-author">第一作者</span> <em style="color:#c25d00;" data-i18n="under-review-text">[评审中]</em> <span class="pub-title">NBsPocket: A Computational Platform Integrating an Pocket Database for Hapten-Specific Nanobody Screening and Analysis.</span></span></li>
-          <li class="pub-item under-review"><span class="pub-num">[19]</span><span class="pub-text"><span class="badge-co" data-badge-key="co-author">共同一作</span> <em style="color:#c25d00;" data-i18n="under-review-text">[评审中]</em> <span class="pub-title">Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.</span></span></li>
-        </ul>
+        <!-- 论文 -->
+        <div class="section" id="publication">
+          <h2 class="section-title">📑 <span data-i18n="pub-title">Publications 代表性论文</span></h2>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag first" data-i18n="tag-first">第一作者</span></div>
+              <strong>[1]</strong> Mao J, Song Y, Kong M, Guo Y, Liu Y, Pu X. <em>Thermostability Prediction Powered by Synergistic Deep Learning at Experimental and Theoretical Levels for Nanobodies.</em> ACS Applied Materials & Interfaces. 2026. <a href="https://doi.org/10.1021/acsami.5c19073" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag first" data-i18n="tag-first">第一作者</span></div>
+              <strong>[2]</strong> Mao J, Luo QQ, Zhang HR, Zheng XH, Shen C, Qi HZ, Hu ML, Zhang H. <em>Discovery of microtubule stabilizers with novel scaffold structures based on virtual screening, biological evaluation, and molecular dynamics simulation.</em> Chemico-Biological Interactions. 2022,352:109784. <a href="https://doi.org/10.1016/j.cbi.2021.109784" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag corresponding" data-i18n="tag-corresponding">通讯作者</span></div>
+              <strong>[3]</strong> Pan CC, Yang CM, Mao J*. <em>Sense-of-agency as clinically accessible features for schizophrenia prediction: Interpretable ensemble machine learning research and webserver development.</em> Asian Journal of Psychiatry. 2025,111:104674. <a href="https://doi.org/10.1016/j.ajp.2025.104674" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[4]</strong> Yang MH, Mao J#, Zhu JH, Zhang H, Ding L. <em>Wangzaozin A, a potent novel microtubule stabilizer, targets both the taxane and laulimalide sites on β-tubulin through molecular dynamics simulations.</em> Life Sciences. 2022:120583. <a href="https://doi.org/10.1016/j.lfs.2022.120583" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[5]</strong> Li YL, Mao J#, Tian XF, Song H, Ren JX. <em>Identification of Salvianolic acid A as a potent inhibitor of PDEs to enhance proliferation of human neural stem cells.</em> Journal of Molecular Structure. 2025,1324:140905. <a href="https://doi.org/10.1016/j.molstruc.2024.140905" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[6]</strong> Li YL, Mao J#, Cheng Z, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <em>Identification of Salvianolic acid A as a potent inhibitor of PDEs to enhance proliferation of human neural stem cells.</em> Molecular Diversity. 2025. <a href="https://doi.org/10.1007/s11030-025-11185-8" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[7]</strong> Li YL, Mao J#, Zhou XY, Zhang DN, Li YZ, Cao ZX, Ren JX. <em>Discovery of anti-glioblastoma natural products based on andrographolide derivatives: efficiently identifying potential multi-target and multifunctional molecules through the integration of in silico methods and experimental verification.</em> Molecular Diversity. 2026. <a href="https://doi.org/10.1007/s11030-026-11531-4" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[8]</strong> Zhang H, Mao J#, Qi HZ, Ding L. <em>In silico prediction of drug-induced developmental toxicity by using machine learning approaches.</em> Molecular Diversity. 2020,24(4):1281-1290. <a href="https://doi.org/10.1007/s11030-019-09991-y" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[9]</strong> Zhang H, Mao J#, Qi HZ, Xie HZ, Shen C, Liu CT, Ding L. <em>Developing novel computational prediction models for assessing chemical-induced neurotoxicity using naïve Bayes classifier technique.</em> Food and Chemical Toxicology. 2020,143:111513. <a href="https://doi.org/10.1016/j.fct.2020.111513" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row"><span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span></div>
+              <strong>[10]</strong> Zhang H, Mao J#, Yang YL, Liu CT, Shen C, Zhang HR, Xie HZ, Ding L. <em>Discovery of novel tubulin inhibitors targeting taxanes site by virtual screening, molecular dynamic simulation, and biological evaluation.</em> Journal of Cellular Biochemistry. 2021,122(11):1609-1624. <a href="https://doi.org/10.1002/jcb.30077" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[11]</strong> Kong M, Chen X, Mao J, Yu J, Song YP, Guo YZ, Pu XM. <em>Machine Learning Navigated Allosteric Network to Unveil Biased Allosteric Modulation of GPCRs.</em> Journal of Chemical Theory and Computation. 2025,21(19):9669-9686. <a href="https://doi.org/10.1021/acs.jctc.5c00935" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[12]</strong> Hu J, Yang SR, Mao J, Shi CJ, Wang GC, Liu YJ, Pu XM. <em>Exploring a general convolutional neural network-based prediction model for critical casting diameter of metallic glasses.</em> Journal of Alloys and Compounds. 2023,947:169479. <a href="https://doi.org/10.1016/j.jallcom.2023.169479" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[13]</strong> Zhang H, Qi HZ, Mao J, Zhang HR, Luo QQ, Hu ML, Shen C, Ding L. <em>Discovery of novel microtubule stabilizers targeting taxane binding site by applying molecular docking, molecular dynamics simulation, and anticancer activity testing.</em> Bioorganic Chemistry. 2022,122:105722. <a href="https://doi.org/10.1016/j.bioorg.2022.105722" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[14]</strong> Zhang H, Liu CT, Mao J, Shen C, Xie RL, Mu B. <em>Development of novel in silico prediction model for drug-induced ototoxicity by using naïve Bayes classifier approach.</em> Toxicology in Vitro. 2020,65:104812. <a href="https://doi.org/10.1016/j.tiv.2020.104812" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[15]</strong> Zhang H, Shen C, Liu RZ, Mao J, Liu CT, Mu B. <em>Developing novel in silico prediction models for assessing chemical reproductive toxicity using the naïve Bayes classifier method.</em> Journal of Applied Toxicology. 2020,40(9):1198-1209. <a href="https://doi.org/10.1002/jat.3975" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[16]</strong> Chen X, Wang K, Chen J, Wu C, Mao J, Song Y, Liu Y, Shao Z, Pu X. <em>Integrative residue-intuitive machine learning and MD Approach to Unveil Allosteric Site and Mechanism for β2AR.</em> Nature Communications. 2024,15(1):8130. <a href="https://doi.org/10.1038/s41467-024-52399-y" target="_blank">DOI</a>
+            </li>
+            <li class="pub-item">
+              <strong>[17]</strong> <span data-i18n="patent">专利 — 基于深度学习和计算模拟的蛋白质变构调节剂的识别方法, 中国发明专利 ZL202211500668.3 (授权日2023.9.8).</span>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row">
+                <span class="pub-tag first" data-i18n="tag-first">第一作者</span>
+                <span class="pub-tag reviewing" data-i18n="tag-reviewing">[评审中]</span>
+              </div>
+              <strong>[18]</strong> <em>NBsPocket: A Computational Platform Integrating an Pocket Database for Hapten-Specific Nanobody Screening and Analysis.</em>
+            </li>
+            <li class="pub-item">
+              <div class="pub-tags-row">
+                <span class="pub-tag co-first" data-i18n="tag-co-first">共同一作</span>
+                <span class="pub-tag reviewing" data-i18n="tag-reviewing">[评审中]</span>
+              </div>
+              <strong>[19]</strong> <em>Bridging Machine Learning and Physics: Blood-Brain Barrier Permeability Prediction and Molecular Dynamics Validation.</em>
+            </li>
+          </ul>
+        </div>
 
         <!-- 工具平台 -->
-        <h1 id="tools" data-i18n="tools-head">🧪 Webserver & 工具平台</h1>
-        <div class="tools-grid">
-          <a class="tool-btn" href="https://www.nbscal.online/" target="_blank" data-i18n="tool1">📊 NBsTem 纳米抗体热稳定性预测</a>
-          <a class="tool-btn" href="http://119.91.252.91:100/" target="_blank" data-i18n="tool2">🧬 NBsPocket 纳米抗体口袋数据库及筛选分析计算平台</a>
-          <a class="tool-btn" href="http://1.15.44.91:800/" target="_blank" data-i18n="tool3">🔬 AntibodyHub Pro (抗体资源导航)</a>
-        </div>
-        
-        <!-- 教育背景 -->
-        <h1 id="about" data-i18n="about-head">🎓 About</h1>
-        <div class="about-timeline">
-          <div class="timeline-item"><span class="timeline-year">2026 – Now</span><span data-i18n="exp1">XHU · 教学科研岗，化学与生物信息学</span></div>
-          <div class="timeline-item"><span class="timeline-year">2022 – 2026</span><span data-i18n="exp2">SCU · 博士，化学与生物信息学</span></div>
-          <div class="timeline-item"><span class="timeline-year">2019 – 2022</span><span data-i18n="exp3">NWNU · 硕士，计算机辅助药物设计 & 计算毒理学</span></div>
-          <div class="timeline-item"><span class="timeline-year">2017 – 2019</span><span data-i18n="exp4">ZJU · 科研助理，生物信息学</span></div>
-          <div class="timeline-item"><span class="timeline-year">2014 – 2018</span><span data-i18n="exp5">CMC · 本科，基因工程/细胞工程</span></div>
-        </div>
-
-        <!-- 联系方式 -->
-        <div class="contact-block">
-          <div style="margin-bottom: 10px; font-size: 1.2rem;"><strong data-i18n="contact-name">Jourmore (Jun Mao)</strong></div>
-          <div>📧 <a href="mailto:maojun@stu.scu.edu.cn">maojun@stu.scu.edu.cn</a></div>
-          <div class="social-badges">
-            <a class="social-badge badge-orcid" href="https://orcid.org/0000-0002-5648-9269" target="_blank">ORCID</a>
-            <a class="social-badge badge-rg" href="https://www.researchgate.net/profile/Mao-Jun/research" target="_blank">ResearchGate</a>
-            <a class="social-badge badge-gh" href="https://github.com/jourmore/" target="_blank">GitHub</a>
+        <div class="section" id="tools">
+          <h2 class="section-title">🧪 <span data-i18n="tools-title">Webserver & 工具平台</span></h2>
+          <div class="tool-grid">
+            <a href="https://www.nbscal.online/" target="_blank" class="tool-card">
+              <i class="fas fa-chart-line"></i>
+              <h5 data-i18n="tool1">📊 NBsTem 纳米抗体热稳定性预测</h5>
+            </a>
+            <a href="http://119.91.252.91:100/" target="_blank" class="tool-card">
+              <i class="fas fa-database"></i>
+              <h5 data-i18n="tool2">🧬 NBsPocket 纳米抗体口袋数据库及筛选分析计算平台</h5>
+            </a>
+            <a href="http://1.15.44.91:800/" target="_blank" class="tool-card">
+              <i class="fas fa-link"></i>
+              <h5 data-i18n="tool3">🔬 AntibodyHub Pro (抗体资源导航)</h5>
+            </a>
           </div>
         </div>
-        <a class="go-top" href="#page-wrapper" data-i18n="go-top">↑ 返回顶部</a>
+
+        <!-- 关于我 -->
+        <div class="section" id="about">
+          <h2 class="section-title">🎓 <span data-i18n="about-title">About</span></h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="year">2026 – Now</div>
+              <div class="desc" data-i18n="edu1">XHU · 教学科研岗，化学与生物信息学</div>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2022 – 2026</div>
+              <div class="desc" data-i18n="edu2">SCU · 博士，化学与生物信息学</div>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2019 – 2022</div>
+              <div class="desc" data-i18n="edu3">NWNU · 硕士，计算机辅助药物设计 & 计算毒理学</div>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2017 – 2019</div>
+              <div class="desc" data-i18n="edu4">ZJU · 科研助理，生物信息学</div>
+            </div>
+            <div class="timeline-item">
+              <div class="year">2014 – 2018</div>
+              <div class="desc" data-i18n="edu5">CMC · 本科，基因工程/细胞工程</div>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <h4>Jourmore (Jun Mao)</h4>
+            <p>📧 <a href="mailto:maojun@stu.scu.edu.cn">maojun@stu.scu.edu.cn</a></p>
+            <div class="social-badges">
+              <a class="social-badge badge-orcid" href="https://orcid.org/0000-0002-5648-9269" target="_blank">ORCID</a>
+              <a class="social-badge badge-rg" href="https://www.researchgate.net/profile/Mao-Jun/research" target="_blank">ResearchGate</a>
+              <a class="social-badge badge-gh" href="https://github.com/jourmore/" target="_blank">GitHub</a>
+            </div>
+          </div>
+          
+          <a class="go-top" href="#page-wrapper" data-i18n="go-top">↑ 返回顶部</a>
+        </div>
       </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <p data-i18n="footer" data-i18n-multi>Jourmore Academic Website © 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | 成都 · 中国</p>
+    </footer>
   </div>
-</div>
 
-<div id="footer">
-  <p data-i18n="footer">Jourmore Academic Website © 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | 成都 · 中国</p>
-</div>
-
-<script src="/jscss/bootstrap.bundle.min.js"></script>
-<script>
-  (function() {
+  <script>
+    // 多语言配置
     const translations = {
-      'menu-category': { zh: 'Menu', en: 'Menu' },
-      'menu-research': { zh: '🔬 研究方向', en: '🔬 Research Areas' },
-      'menu-pub': { zh: '📄 发表论文', en: '📄 Publications' },
-      'menu-tools': { zh: '🧰 相关资源', en: '🧰 Platforms & Tools' },
-      'menu-about': { zh: '🎓 关于我', en: '🎓 About' },
-      'news-title': { zh: '📢 News', en: '📢 News' },
-      'news-content': { zh: '<strong>2026.06</strong><br>博士毕业并入职西华大学任教，<br>继续深耕计算驱动药物发现与计算毒理学。', en: '<strong>2026.06</strong><br>Ph.D. graduation and joined Xihua University as faculty,<br>continuing to advance AI-driven drug discovery and computational toxicology.' },
-      'welcome-title': { zh: '欢迎来到 <b>Jourmore 学术网站</b>', en: 'Welcome to <b>Jourmore Academic Website</b>' },
+      'nav-research': { zh: '研究', en: 'Research' },
+      'nav-publication': { zh: '论文', en: 'Publications' },
+      'nav-tools': { zh: '资源', en: 'Tools' },
+      'nav-about': { zh: '关于', en: 'About' },
+      'news-title': { zh: 'News', en: 'News' },
+      'news-content': { 
+        zh: '博士毕业并入职西华大学任教，继续深耕计算驱动药物发现与计算毒理学相关研究。', 
+        en: 'Ph.D. graduated and joined Xihua University as a faculty member, continuing research in computation-driven drug discovery and computational toxicology.' 
+      },
+      'welcome-title': { zh: '欢迎来到 <b>Jun Mao 学术网站</b>', en: 'Welcome to <b>Jourmore Academic Website</b>' },
       'welcome-sub': { zh: '生物信息学 & 化学信息学', en: 'Bioinformatics & Cheminformatics' },
-      'tag1': { zh: '🤖 机器学习 / 深度学习', en: '🤖 Machine / Deep Learning (AI/ML/DL)' },
-      'tag2': { zh: '⚛️ 分子动力学模拟', en: '⚛️ Molecular Dynamics (MD)' },
-      'tag3': { zh: '🌐 数据库与网络服务器', en: '🌐 Database & Web Server (Tool)' },
-      'research-head': { zh: '研究方向', en: 'Research Directions' },
-      'research-card1-title': { zh: '🧬 小分子 & 蛋白 & 纳米抗体', en: '🧬 Small Molecules & Proteins & Nanobodies' },
-      'research-card1-li1': { zh: '计算机辅助药物筛选与设计 (CADD/AIDD)', en: 'Computer-Aided Drug Discovery & Design (CADD/AIDD)' },
-      'research-card1-li2': { zh: '计算毒理学 / 网络毒理学 / 网络药理学', en: 'Computational Toxicology / Network Toxicology / Network Pharmacology' },
-      'research-card2-title': { zh: '🍎 食品暗物质与毒性预测 (计算毒理学)', en: '🍎 Food Dark Matter & Toxicity Prediction (Computational Toxicology)' },
-      'research-card2-li1': { zh: '食品中未知化合物 (暗物质) 空间分析与危害识别', en: 'Spatial analysis and hazard identification of unknown food compounds (dark matter)' },
-      'research-card2-li2': { zh: '有毒化合物预测及毒性机制解析', en: 'Toxic compound prediction and mechanism elucidation (ML + MD)' },
-      'pub-head': { zh: '📑 发表论文 (代表性论文)', en: '📑 Publications (Selected)' },
-      'tools-head': { zh: '🧪 网络服务器 & 工具平台', en: '🧪 Webserver & Toolkits' },
-      'tool1': { zh: '📊 NBsTem: 纳米抗体热稳定性预测', en: '📊 NBsTem: Nanobody Thermostability Predictor' },
-      'tool2': { zh: '🧬 NBsPocket: 纳米抗体口袋数据库及筛选分析', en: '🧬 NBsPocket: Nanobody Pocket Database & Screening' },
-      'tool3': { zh: '🔬 AntibodyHub Pro (抗体资源导航)', en: '🔬 AntibodyHub Pro (Antibody Resource Hub)' },
-      'about-head': { zh: '🎓 关于我', en: '🎓 About' },
-      'exp1': { zh: 'XHU · 教学科研岗，化学与生物信息学', en: 'XHU · Tenure-track Faculty, Bioinformatics & Cheminformatics' },
-      'exp2': { zh: 'SCU · 博士，化学与生物信息学', en: 'SCU · Ph.D., Bioinformatics & Cheminformatics' },
-      'exp3': { zh: 'NWNU · 硕士，计算机辅助药物设计 & 计算毒理学', en: 'NWNU · M.S., CADD & Computational Toxicology' },
-      'exp4': { zh: 'ZJU · 科研助理，生物信息学', en: 'ZJU · Research Assistant, Bioinformatics' },
-      'exp5': { zh: 'CMC · 本科，基因工程/细胞工程', en: 'CMC · B.S., Genetic/Cellular Engineering' },
+      'tag1': { zh: '🤖 机器/深度学习 (AI/ML/DL)', en: '🤖 Machine / Deep Learning (AI/ML/DL)' },
+      'tag2': { zh: '⚛️ 分子动力学 (MD)', en: '⚛️ Molecular Dynamics (MD)' },
+      'tag3': { zh: '🌐 数据库与Web服务器 (工具)', en: '🌐 Database & Web Server (Tool)' },
+      'research-title': { zh: '研究方向', en: 'Research Interests' },
+      'research1-title': { zh: '🧬 小分子 & 蛋白 & 纳米抗体', en: '🧬 Small Molecules, Proteins & Nanobodies' },
+      'research1-item1': { zh: '计算机辅助药物筛选与设计 (CADD/AIDD)', en: 'Computer-Aided Drug Screening & Design (CADD/AIDD)' },
+      'research1-item2': { zh: '计算毒理学 / 网络毒理学 / 网络药理学 (Network)', en: 'Computational Toxicology / Network Toxicology / Network Pharmacology' },
+      'research2-title': { zh: '🍎 食品暗物质与毒性预测 (计算毒理学)', en: '🍎 Food Dark Matter & Toxicity Prediction' },
+      'research2-item1': { zh: '食品中未知化合物 (暗物质) 空间分析与危害识别', en: 'Spatial analysis and hazard identification of unknown compounds (dark matter) in food' },
+      'research2-item2': { zh: '有毒化合物预测及毒性机制解析 (机器学习 + MD)', en: 'Toxic compound prediction and mechanism elucidation (ML + MD)' },
+      'pub-title': { zh: '发表论文', en: 'Publications' },
+      'tag-first': { zh: '第一作者', en: 'First Author' },
+      'tag-co-first': { zh: '共同一作', en: 'Co-First Author' },
+      'tag-corresponding': { zh: '通讯作者', en: 'Corresponding Author' },
+      'tag-reviewing': { zh: '[评审中]', en: '[Under Review]' },
+      'patent': { 
+        zh: '专利 — 基于深度学习和计算模拟的蛋白质变构调节剂的识别方法, 中国发明专利 ZL202211500668.3 (授权日2023.9.8).', 
+        en: 'Patent — Method for identifying protein allosteric modulators based on deep learning and computational simulation, China Invention Patent ZL202211500668.3 (Authorized on 2023.9.8).' 
+      },
+      'tools-title': { zh: '网络服务器 & 工具平台', en: 'Web Servers & Tools' },
+      'tool1': { zh: '📊 NBsTem 纳米抗体热稳定性预测', en: '📊 NBsTem Nanobody Thermostability Prediction' },
+      'tool2': { zh: '🧬 NBsPocket 纳米抗体口袋数据库及筛选分析计算平台', en: '🧬 NBsPocket Nanobody Pocket Database & Screening Platform' },
+      'tool3': { zh: '🔬 AntibodyHub Pro (抗体资源导航)', en: '🔬 AntibodyHub Pro (Antibody Resource Navigation)' },
+      'about-title': { zh: 'About 关于我', en: 'About Me' },
+      'edu1': { zh: 'XHU · 教学科研岗，化学与生物信息学', en: 'XHU · Faculty, Cheminformatics & Bioinformatics' },
+      'edu2': { zh: 'SCU · 博士，化学与生物信息学', en: 'SCU · Ph.D., Cheminformatics & Bioinformatics' },
+      'edu3': { zh: 'NWNU · 硕士，计算机辅助药物设计 & 计算毒理学', en: 'NWNU · M.S., CADD & Computational Toxicology' },
+      'edu4': { zh: 'ZJU · 科研助理，生物信息学', en: 'ZJU · Research Assistant, Bioinformatics' },
+      'edu5': { zh: 'CMC · 本科，基因工程/细胞工程', en: 'CMC · B.S., Genetic/Cell Engineering' },
       'go-top': { zh: '↑ 返回顶部', en: '↑ Back to Top' },
-      'footer': { zh: 'Jourmore Academic Website © 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | 成都 · 中国', en: 'Jourmore Academic Website © 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | Chengdu · China' },
-      'patent-text': { zh: '<b>专利</b> — 基于深度学习和计算模拟的蛋白质变构调节剂的识别方法, 中国发明专利 ZL202211500668.3 (授权日2023.9.8).', en: '<b>Patent</b> — Method for identifying allosteric modulators of proteins based on deep learning and computational simulation, Chinese Invention Patent ZL202211500668.3 (Granted 2023.9.8).' },
-      'under-review-text': { zh: '[评审中]', en: '[Under Review]' },
-      'contact-name': { zh: 'Jun Mao', en: 'Jourmore' },
-      'title_i18n': { zh: 'Jourmore | 计算生物学与化学信息学', en: 'Jourmore | Computational Biology & Cheminformatics' }
+      'footer': { 
+        zh: 'Jourmore 学术网站 © 2026. 保留所有权利 by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | 成都 · 中国', 
+        en: 'Jourmore Academic Website © 2026. All rights reserved by <a href="https://jourmore.github.io/" target="_blank">Jourmore</a>. | Chengdu · China' 
+      }
     };
-    const badgeMap = {
-      'first-author': { zh: '第一作者', en: 'First Author' },
-      'co-author': { zh: '共同一作', en: 'Co-first Author' },
-      'corr-author': { zh: '通讯作者', en: 'Corresponding Author' }
-    };
-    let currentLang = 'zh';
+
+    let currentLang = 'en';
+
     function applyLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -623,33 +868,38 @@
           else el.innerText = translations[key][lang];
         }
       });
-      const newsDiv = document.getElementById('newsContent');
-      if (newsDiv) newsDiv.innerHTML = translations['news-content'][lang];
-      document.querySelectorAll('.nav-link-i18n').forEach(link => {
-        const zhText = link.getAttribute('data-nav-zh');
-        const enText = link.getAttribute('data-nav-en');
-        if (lang === 'zh' && zhText) link.innerText = zhText;
-        else if (lang === 'en' && enText) link.innerText = enText;
-      });
-      document.querySelectorAll('[data-badge-key]').forEach(badge => {
-        const key = badge.getAttribute('data-badge-key');
-        if (badgeMap[key] && badgeMap[key][lang]) badge.innerText = badgeMap[key][lang];
-      });
-      document.querySelectorAll('[data-i18n="under-review-text"]').forEach(el => { el.innerText = translations['under-review-text'][lang]; });
-      const patentElem = document.querySelector('.pub-item .pub-text[data-i18n="patent-text"]');
-      if (patentElem) patentElem.innerHTML = translations['patent-text'][lang];
-      const toggleBtn = document.getElementById('langToggle');
-      if (toggleBtn) toggleBtn.innerText = lang === 'zh' ? 'English' : '中文';
-      const titleElem = document.getElementById('pageTitle');
-      if (titleElem && translations.title_i18n && translations.title_i18n[lang]) {
-        document.title = translations.title_i18n[lang];
-      }
+      
+      // 更新语言切换按钮文本
+      const langBtn = document.querySelector('.lang-switch');
+      if (langBtn) langBtn.innerText = (lang === 'zh') ? 'English' : '中文';
+      
+      // 更新页面标题
+      document.getElementById('pageTitle').innerText = (lang === 'zh') ? 
+        'Jourmore' : 
+        'Jourmore';
     }
-    function toggleLanguage() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; applyLanguage(currentLang); document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en'; }
-    const langBtn = document.getElementById('langToggle');
-    if (langBtn) langBtn.addEventListener('click', toggleLanguage);
-    applyLanguage('zh');
-  })();
-</script>
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'zh') ? 'en' : 'zh';
+      applyLanguage(currentLang);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // 初始化
+    applyLanguage('en');
+  </script>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 手动初始化轮播，确保自动播放和手动切换都正常工作
+    $(document).ready(function () {
+      $('#carouselExampleInterval').carousel({ interval: 2500, ride: 'carousel' });
+    });
+  </script>
 </body>
 </html>
